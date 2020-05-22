@@ -10,7 +10,7 @@ import List from "../lists/List";
 import OutputItem from "../lists/OutputItem";
 import TextInputItem from "../lists/TextInputItem";
 import EnterItem from "../lists/EnterItem";
-import { ScrollView } from "react-native";
+import { ScrollView,Text } from "react-native";
 import { timestampToString } from "../../utils/dates";
 import type { Device } from "../../types/Device";
 import type { Dispatch } from "../../types/Dispatch";
@@ -62,6 +62,7 @@ class DeviceInfo extends React.Component<Props, State> {
     } = this.props;
     return (
       <Screen navigationBar={<NavigationBar title="Settings" />}>
+        <Text>device info</Text>
         {device && (
           <ScrollView>
             <List>

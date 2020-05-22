@@ -7,7 +7,8 @@ import {
   Image,
   ActivityIndicator,
   StyleSheet,
-  Clipboard
+  Clipboard,
+  Text
 } from "react-native";
 import DeviceComponent from "../devices/DeviceComponent";
 import React from "react";
@@ -94,14 +95,17 @@ class DevicesScreen extends React.Component<Props> {
 
     return (
       <View style={{ flex: 1 }}>
+         <Text>devices</Text>
         {devices.length ? (
           <FlatList
             data={devices}
             keyExtractor={item => item.id}
             renderItem={({ item }) => (
+              
               <DeviceComponent
                 name={item.name ? item.name : item.dev}
                 user={item.usr}
+                all={item}
                 onClick={() => onDeviceClick(item)}
               />
             )}
@@ -156,7 +160,7 @@ class DevicesScreen extends React.Component<Props> {
       <Screen
         navigationBar={
           <NavigationBar
-            title={"thinger.io"}
+            title={"Smart Switch"}
             main={true}
             button={
               isUserDevices
