@@ -1,7 +1,7 @@
 //@flow
 
 import { connect } from "react-redux";
-import { ActivityIndicator, View } from "react-native";
+import { ActivityIndicator, View,Text } from "react-native";
 import React from "react";
 import ErrorMessage from "../ErrorMessage";
 import { DARK_BLUE } from "../../constants/ThingerColors";
@@ -44,6 +44,7 @@ type State = {
 };
 
 class ResourcesScreen extends React.Component<Props, State> {
+
   state = {
     pullRefresh: false
   };
@@ -77,6 +78,9 @@ class ResourcesScreen extends React.Component<Props, State> {
     if (isMultipleResource(resources[item].data)) {
       const data: MultipleResource = (resources[item].data: any);
       return (
+        <View>
+        <Text>multiple aware flat list</Text>
+
         <MultipleResourceView
           resource={item}
           data={data || {}}
@@ -85,10 +89,14 @@ class ResourcesScreen extends React.Component<Props, State> {
           onPostClick={onPostClick}
           onChartClick={() => onChartClick(item)}
         />
+        </View>
       );
     } else {
       const data: SimpleResource = (resources[item].data: any);
       return (
+        <View>
+        <Text>Simple resource view</Text>
+
         <SimpleResourceView
           resource={item}
           data={data || {}}
@@ -98,6 +106,7 @@ class ResourcesScreen extends React.Component<Props, State> {
           onChartClick={() => onChartClick(item)}
           onRun={() => onRun(item)}
         />
+        </View>
       );
     }
   };
@@ -106,6 +115,8 @@ class ResourcesScreen extends React.Component<Props, State> {
     const { resources, device } = this.props;
 
     return (
+      <View>
+        <Text>keyboard aware flat list</Text>
       <KeyboardAwareFlatList
         keyboardOpeningTime={0}
         data={Object.keys(resources)}
@@ -114,6 +125,7 @@ class ResourcesScreen extends React.Component<Props, State> {
         refreshing={device.isFetching}
         onRefresh={(() => this.onPullRefresh(): any)}
       />
+      </View>
     );
   }
 
@@ -124,7 +136,7 @@ class ResourcesScreen extends React.Component<Props, State> {
       <Screen
         navigationBar={
           <NavigationBar
-            title={device ? (device.name ? device.name : device.dev) : "Device"}
+            title={device ? (device.name ? "device name"+device.name : "device dev"+device.dev) : "Device"}
             button={{
               icon: "cog",
               onPress: onSettingsClick
@@ -132,6 +144,7 @@ class ResourcesScreen extends React.Component<Props, State> {
           />
         }
       >
+        <Text>resource.js</Text>
         {device &&
           (device.isFetching && !this.state.pullRefresh ? (
             <View

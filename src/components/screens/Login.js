@@ -55,7 +55,7 @@ class LoginScreen extends React.Component<Props> {
        {/* <Text>ISAT OPEN SOURCE IOT</Text> */}
 
 
-<Image
+{/* <Image
             source={require("../../assets/isat.png")}
             style={{
               height: 150,
@@ -63,7 +63,7 @@ class LoginScreen extends React.Component<Props> {
               margin: MARGIN * 2,
               alignSelf: "center"
             }}
-          />
+          /> */}
           <Kohana
             style={{
               backgroundColor: COLOR_BACKGROUND,

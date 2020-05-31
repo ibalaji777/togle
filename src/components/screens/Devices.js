@@ -249,7 +249,7 @@ top_icon_bg_color:'darkgreen'
         />
 
 
-        {/* {devices.length ? (
+        {devices.length ? (
           <FlatList
             data={devices}
             keyExtractor={item => item.id}
@@ -275,7 +275,7 @@ top_icon_bg_color:'darkgreen'
             <H1Text>Ooops!</H1Text>
             <H2Text>You could add a device...</H2Text>
           </View>
-        )} */}
+        )}
 
         {!isUserDevices && (
           <ActionButton buttonColor="rgba(231,76,60,1)">

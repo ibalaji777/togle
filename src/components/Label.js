@@ -25,6 +25,9 @@ export default class Label extends React.Component<Props> {
           padding: 15
         }}
       >
+           <Text style={{ fontSize: 20, color: locked ? "gray" : color }}>
+            label something
+          </Text>
         <Icon
           name={!locked ? (selected ? "check-circle" : "circle-o") : "ban"}
           size={25}

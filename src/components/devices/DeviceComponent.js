@@ -16,13 +16,16 @@ export default class DeviceComponent extends React.Component<Props> {
     const { name, user,all, onClick } = this.props;
 
     return (
-      <TouchableOpacity onPress={onClick}>
+      <View>
+      {/* <Text style={styles.device}>Device component</Text> */}
+     <TouchableOpacity onPress={onClick}>
         <View style={{ backgroundColor: "white", padding: 15 }}>
           <Text style={styles.device}>{name}</Text>
           <Text style={styles.user}>{user}</Text>
-          {/* <Text style={styles.user}>{ JSON.stringify(all)}</Text> */}
+          <Text style={styles.user}>{ JSON.stringify(all)}</Text>
         </View>
       </TouchableOpacity>
+      </View>
     );
   }
 }

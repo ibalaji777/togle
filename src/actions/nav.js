@@ -7,7 +7,9 @@ type GO_TO_MAIN = { type: "Navigation/MAIN" };
 export type NavAction = NAVIGATE | GO_BACK | GO_TO_MAIN;
 
 export function navigate(screen: string): NAVIGATE {
+  console.log("screen navigation from nav.js"+screen);
   return {
+
     type: "Navigation/NAVIGATE",
     routeName: screen
   };

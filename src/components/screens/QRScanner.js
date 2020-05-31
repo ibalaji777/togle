@@ -35,10 +35,13 @@ class QRScanner extends React.Component<Props, State> {
 
     this.setState({ scanning: true });
 
+    //device already exist or not (validation)
     try {
       const device = parseJWT(data.data);
+      //add group manually here
       const id = Object.keys(device)[0];
       if (devices.includes(id)) {
+        console.log(device)
         displayError("This device already exists");
       } else {
         addDevice(device);
@@ -98,6 +101,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     addDevice: (device: Device) => {
+      console.log("device added");
+      console.log(device)
       dispatch(addDevice(device, false));
       dispatch(ToastActionsCreators.displayInfo("Added!", 1000));
       return dispatch(goBack());
