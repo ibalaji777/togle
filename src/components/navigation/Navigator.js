@@ -8,6 +8,7 @@ import {
 import { connect } from "react-redux";
 import React from "react";
 import Devices from "../screens/Devices";
+import Device2step from "../screens/Device2step";
 import { createReduxBoundAddListener } from "react-navigation-redux-helpers";
 import type { Dispatch } from "../../types/Dispatch";
 import QRScanner from "../screens/QRScanner";
@@ -59,7 +60,10 @@ export const Routes = StackNavigator(
   {
     Main: { screen: MainRoutes, key: "Main" },
     Scanner: { screen: QRScanner },
+        Scanner: { screen: QRScanner },
     Settings: { screen: UserSettings },
+    //new grouped devices
+    Device2step: { screen: Device2step },
     Device: { screen: Resources },
     Info: { screen: DeviceInfo },
     Chart: { screen: Chart },
@@ -78,6 +82,7 @@ type Props = {
   dispatch: Dispatch,
   nav: any
 };
+
 
 class Navigator extends React.Component<Props> {
   render() {

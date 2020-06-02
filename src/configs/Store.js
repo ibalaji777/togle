@@ -5,6 +5,7 @@ import { persistStore, persistCombineReducers } from "redux-persist";
 import { createReactNavigationReduxMiddleware } from "react-navigation-redux-helpers";
 import devices from "../reducers/devices";
 import selectedDevice from "../reducers/selectedDevice";
+import selectedGroup from "../reducers/selectedGroup";
 import resources from "../reducers/resources";
 import selectedResource from "../reducers/selectedResource";
 import selectedAttributes from "../reducers/selectedAttributes";
@@ -35,6 +36,7 @@ function configureStore() {
     devices,
     userDevices,
     selectedDevice,
+    selectedGroup,
     resources,
     selectedResource,
     selectedAttributes,

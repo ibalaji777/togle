@@ -22,7 +22,7 @@ export default class DeviceComponent extends React.Component<Props> {
         <View style={{ backgroundColor: "white", padding: 15 }}>
           <Text style={styles.device}>{name}</Text>
           <Text style={styles.user}>{user}</Text>
-          <Text style={styles.user}>{ JSON.stringify(all)}</Text>
+          {/* <Text style={styles.user}>{ JSON.stringify(all)}</Text> */}
         </View>
       </TouchableOpacity>
       </View>

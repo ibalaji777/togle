@@ -56,6 +56,11 @@ export function removeDevice(device: string): REMOVE {
 export function selectDevice(device: string): SELECT {
   return { type: "DEVICE_SELECT", device };
 }
+//select group
+export function selectGroup(device: string): SELECT {
+  return { type: "GROUP_SELECT", device };
+}
+
 
 export function setDeviceName(device: string, name: string): SET_NAME {
   return { type: "DEVICE_SET_NAME", device, name };

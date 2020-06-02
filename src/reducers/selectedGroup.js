@@ -1,19 +1,18 @@
 //@flow
 
 import type { DeviceAction } from "../actions/device";
-import type { SelectedDeviceState } from "../types/State";
+import type { SelectedGroupState } from "../types/State";
 
-const initialState: SelectedDeviceState = "";
+const initialState: SelectedGroupState = "";
 
 export default function selectedDevice(
-  state: SelectedDeviceState = initialState,
+  state: SelectedGroupState = initialState,
   action: DeviceAction
 ) {
   switch (action.type) {
-    case "DEVICE_SELECT":
+    case "GROUP_SELECT":
       return action.device;
-
-      
+     
     default:
       return state;
   }

@@ -9,8 +9,7 @@ import {
   StyleSheet,
   Clipboard,
   Text,
-  TouchableWithoutFeedback ,
-  TouchableOpacity 
+  TouchableWithoutFeedback 
 } from "react-native";
 import DeviceComponent from "../devices/DeviceComponent";
 import React from "react";
@@ -18,7 +17,7 @@ import { MARGIN } from "../../constants/ThingerStyles";
 import Screen from "../containers/Screen";
 import { navigate } from "../../actions/nav";
 import { getResourcesFromApi } from "../../actions/fetch";
-import { addDevice, selectDevice,selectGroup } from "../../actions/device";
+import { addDevice, selectDevice } from "../../actions/device";
 import { removeAllResources } from "../../actions/resource";
 import type { Dispatch } from "../../types/Dispatch";
 import NavigationBar from "../navigation/NavigationBar";
@@ -36,7 +35,6 @@ import { ToastActionsCreators } from "react-native-redux-toast";
 type Props = {
   ids: Array<string>,
   devices: Array<Device>,
-  // onGroupClick: (device:Device) => Dispatch,
   onDeviceClick: (device: Device) => Dispatch,
   onQRScannerPress: () => Dispatch,
   onAddDevice: (device: Device) => Dispatch,
@@ -47,7 +45,7 @@ type Props = {
   displayError: (message: string) => Dispatch
 };
 
-class DevicesScreen extends React.Component<Props> {
+class DevicesStep2Screen extends React.Component<Props> {
   constructor(props) {
     super(props);
     new GoogleAnalyticsTracker(ID).trackScreenView("Main");
@@ -197,21 +195,17 @@ top_icon_bg_color:'darkgreen'
 
 //newly added function 
   group_iot = ({ item }) => (
-    <View        style={{ flex: 1, marginHorizontal: 5, marginBottom: 20,shadowColor: 'red',
+    <View style={{ flex: 1, marginHorizontal: 5, marginBottom: 20,shadowColor: 'red',
     shadowOffset: { width: 2, height: 2 },
     shadowOpacity: 0.9,
     shadowRadius: 10,  
     elevation: 15 }}>
-      <TouchableOpacity onPress={()=>this.props.onGroupClick(item)}>  
-          <Image
+      <Image
         style={{ width: "100%", height: 180 }}
         // source={{ uri: item.image }}
         // source={item.image}
-
         source={this.switch_group(item.group)}
       />
-
-
 
 <View   style={{ justifyContent:'center',alignItems:'center', position:"absolute",borderRadius :50,backgroundColor:item.top_icon_bg_color, top:5,left:5, width: 60, height: 60,overflow:"hidden", }}>
 <Image
@@ -219,7 +213,8 @@ top_icon_bg_color:'darkgreen'
         // source={{ uri: item.image }}
         source={this.switch_group(item.group)}
       />
-    </View>
+    
+</View>
 <Text style={{ position:"absolute",fontSize:12,fontWeight: '900',   textAlign: "center", marginTop: 8,bottom:10,left:10 }}>{item.title}</Text>
 <View   style={{ justifyContent:'center',alignItems:'center',fontSize:18,fontWeight: "bold", position:"absolute",borderRadius :50,backgroundColor:'rgba(211, 211, 211, 0.4)', bottom:10,right:5, width: 45, height: 45,shadowColor: 'red',
     shadowOffset: { width: 2, height: 2 },
@@ -228,7 +223,6 @@ top_icon_bg_color:'darkgreen'
     elevation: 15 }}>  
 <Text style={{fontSize:20,zIndex: 500,fontWeight:'900'}}>></Text>
 </View>
-</TouchableOpacity>
     </View>
   );
 
@@ -237,7 +231,6 @@ top_icon_bg_color:'darkgreen'
   renderContent() {
     const {
       devices,
-   
       onDeviceClick,
       isUserDevices,
       onQRScannerPress
@@ -245,15 +238,15 @@ top_icon_bg_color:'darkgreen'
 
     return (
       <View style={{ flex: 1 }}>
-         <Text>devices</Text>
-         <FlatList
+         <Text>devices2step hahaha{JSON.stringify(this.props)}</Text>
+         {/* <FlatList
           data={this.DATA}
           renderItem={this.group_iot}
           keyExtractor={item => item.id}
           numColumns={2}
           style={{ flex: 1 }}
           contentContainerStyle={{ paddingVertical: 20 }}
-        />
+        /> */}
 
 
         {devices.length ? (
@@ -318,21 +311,33 @@ top_icon_bg_color:'darkgreen'
 
     return (
       <Screen
-        navigationBar={
-          <NavigationBar
-            title={"Smart Switch"}
-            main={true}
-            button={
-              isUserDevices
-                ? {
-                    icon: "cog",
-                    onPress: onSettingsPress
-                  }
-                : undefined
-            }
-          />
-        }
-      >
+            //   navigationBar={
+      //     <NavigationBar
+      //       title={"Smart Switch"}
+      //       main={true}
+      //       button={
+      //         isUserDevices
+      //           ? {
+      //               icon: "cog",
+      //               onPress: onSettingsPress
+      //             }
+      //           : undefined
+      //       }
+      //     />
+      //   }
+      // >
+
+      navigationBar={
+        <NavigationBar
+          title={"Smart switch"}
+          button={{
+            icon: "cog",
+            onPress: onSettingsPress
+          }}
+        />
+      }
+    >
+
         {isFetching ? (
           <View
             style={{
@@ -365,6 +370,7 @@ const mapStateToProps = state => {
   const isUserDevices: boolean = currentTab === "UserDevices";
 
   return {
+    group:state.selectedGroup,
     ids: Object.keys(state.devices),
     devices: isUserDevices
       ? (Object.values(state.devices): any).filter(device =>
@@ -380,22 +386,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onGroupClick: group => {
-      console.log("----------group id---------------");
-      dispatch(removeAllResources());
-      dispatch(selectGroup(group));
-      dispatch(navigate("Device2step"));
-
-    },
     onDeviceClick: device => {
-      console.log("----------device info---------------");
-      console.log(removeAllResources());
       dispatch(removeAllResources());
-      console.log(selectDevice(device.id));
       dispatch(selectDevice(device.id));
-      console.log(getResourcesFromApi(device));
       dispatch(getResourcesFromApi(device));
-      console.log(navigate("Device"));
       dispatch(navigate("Device"));
     },
     onSettingsPress: () => dispatch(navigate("Settings")),
@@ -408,4 +402,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DevicesScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(DevicesStep2Screen);

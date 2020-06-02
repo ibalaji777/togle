@@ -40,6 +40,7 @@ export type ResourcesState = {
 };
 
 export type SelectedDeviceState = string;
+export type SelectedGroupState = string;
 
 export type SelectedResourceState = string;
 

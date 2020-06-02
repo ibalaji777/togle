@@ -10,7 +10,7 @@ export function navigate(screen: string): NAVIGATE {
   console.log("screen navigation from nav.js"+screen);
   return {
 
-    type: "Navigation/NAVIGATE",
+    type: "Navigation/NAVIGATE", //action
     routeName: screen
   };
 }

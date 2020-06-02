@@ -145,6 +145,8 @@ class ResourcesScreen extends React.Component<Props, State> {
         }
       >
         <Text>resource.js</Text>
+        <Text>{JSON.stringify(this.props)}</Text>
+
         {device &&
           (device.isFetching && !this.state.pullRefresh ? (
             <View
