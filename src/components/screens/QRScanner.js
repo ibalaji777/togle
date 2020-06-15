@@ -93,12 +93,16 @@ class QRScanner extends React.Component<Props, State> {
 }
 
 const mapStateToProps = state => {
+  console.log("------------ from QR scanner-------------")
+  console.log(state);
   return {
-    devices: Object.keys(state.devices)
+    devices: Object.keys(state.devices),
+    group:state.selectedGroup
   };
 };
 
 const mapDispatchToProps = dispatch => {
+  console.log("---------from dispatch qr scanner----------")
   return {
     addDevice: (device: Device) => {
       console.log("device added");

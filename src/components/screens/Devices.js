@@ -104,21 +104,21 @@ image:require('../../assets/group/bg.png'),
 group:'garden',
 top_icon_bg_color:'darkgreen'
     },
-//     {
-//       id: "6",
-//       title: "SABOR MORENO",
-// image:require('../../assets/group/bg.png')
-//     },
-//     {
-//       id: "7",
-//       title: "0 MESTRE PUB",
-// image:require('../../assets/group/bg.png')
-//     },
-//     {
-//       id: "8",
-//       title: "GRILL 54 CHEF",
-// image:require('../../assets/group/bg.png')
-//     }
+    {
+      id: "6",
+      title: "SABOR MORENO",
+image:require('../../assets/group/bg.png')
+    },
+    {
+      id: "7",
+      title: "0 MESTRE PUB",
+image:require('../../assets/group/bg.png')
+    },
+    {
+      id: "8",
+      title: "GRILL 54 CHEF",
+image:require('../../assets/group/bg.png')
+    }
   ];
   
 
@@ -206,9 +206,9 @@ top_icon_bg_color:'darkgreen'
           <Image
         style={{ width: "100%", height: 180 }}
         // source={{ uri: item.image }}
-        // source={item.image}
+        source={item.image}
 
-        source={this.switch_group(item.group)}
+        // source={this.switch_group(item.group)}
       />
 
 
@@ -256,7 +256,7 @@ top_icon_bg_color:'darkgreen'
         />
 
 
-        {devices.length ? (
+        {/* {devices.length ? (
           <FlatList
             data={devices}
             keyExtractor={item => item.id}
@@ -282,17 +282,29 @@ top_icon_bg_color:'darkgreen'
             <H1Text>Ooops!</H1Text>
             <H2Text>You could add a device...</H2Text>
           </View>
-        )}
+        )} */}
 
-        {!isUserDevices && (
+        {/* {!isUserDevices && ( */}
           <ActionButton buttonColor="rgba(231,76,60,1)">
+
             <ActionButton.Item
+              buttonColor="#9b59b6"
+              title="Add Group"
+              onPress={()=>{console.log("group button clicked")}}
+            >
+             
+              <Icon name="content-paste" style={styles.actionButtonIcon} />
+            </ActionButton.Item>
+            
+            {/* <ActionButton.Item
               buttonColor="#9b59b6"
               title="from clipboard"
               onPress={this.onClipboardButtonPress}
             >
+             
               <Icon name="content-paste" style={styles.actionButtonIcon} />
             </ActionButton.Item>
+            
             <ActionButton.Item
               buttonColor="#3498db"
               title="from picture"
@@ -306,9 +318,9 @@ top_icon_bg_color:'darkgreen'
               onPress={onQRScannerPress}
             >
               <Icon name="photo-camera" style={styles.actionButtonIcon} />
-            </ActionButton.Item>
+            </ActionButton.Item> */}
           </ActionButton>
-        )}
+        {/* )} */}
       </View>
     );
   }
@@ -360,9 +372,12 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
+  console.log("-----------screen devices------------");
+  console.log(state);
   const { routes: tabs, index: selectedTab } = state.nav.routes[0];
   const currentTab = tabs[selectedTab].routeName;
-  const isUserDevices: boolean = currentTab === "UserDevices";
+  // const isUserDevices: boolean = currentTab === "UserDevices";
+  const isUserDevices: boolean = true;
 
   return {
     ids: Object.keys(state.devices),
@@ -375,6 +390,7 @@ const mapStateToProps = state => {
         ),
     isUserDevices,
     isFetching: state.login.isFetching
+
   };
 };
 

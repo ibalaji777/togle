@@ -1,5 +1,6 @@
 //@flow
 
+import type { Group} from './group'
 import type { Device } from "./Device";
 import type { Resource } from "./Resource";
 import type { Chart } from "./Chart";
@@ -30,6 +31,11 @@ export type LoginState = {
 
 export type DevicesState = {
   [device: string]: Device
+};
+
+export type GroupState={
+
+  [group:string]:Group
 };
 
 export type ResourcesState = {

@@ -6,6 +6,7 @@ import { createReactNavigationReduxMiddleware } from "react-navigation-redux-hel
 import devices from "../reducers/devices";
 import selectedDevice from "../reducers/selectedDevice";
 import selectedGroup from "../reducers/selectedGroup";
+import  group from "../reducers/group"
 import resources from "../reducers/resources";
 import selectedResource from "../reducers/selectedResource";
 import selectedAttributes from "../reducers/selectedAttributes";
@@ -34,6 +35,7 @@ function configureStore() {
   const reducer = persistCombineReducers(config, {
     login,
     devices,
+    group,
     userDevices,
     selectedDevice,
     selectedGroup,

@@ -17,7 +17,7 @@ import { MARGIN } from "../../constants/ThingerStyles";
 import Screen from "../containers/Screen";
 import { navigate } from "../../actions/nav";
 import { getResourcesFromApi } from "../../actions/fetch";
-import { addDevice, selectDevice } from "../../actions/device";
+import { addDevice, selectDevice,selectGroup } from "../../actions/device";
 import { removeAllResources } from "../../actions/resource";
 import type { Dispatch } from "../../types/Dispatch";
 import NavigationBar from "../navigation/NavigationBar";
@@ -238,7 +238,7 @@ top_icon_bg_color:'darkgreen'
 
     return (
       <View style={{ flex: 1 }}>
-         <Text>devices2step hahaha{JSON.stringify(this.props)}</Text>
+        <Text>devices2step hahaha{JSON.stringify(this.props)}</Text>
          {/* <FlatList
           data={this.DATA}
           renderItem={this.group_iot}
@@ -393,7 +393,14 @@ const mapDispatchToProps = dispatch => {
       dispatch(navigate("Device"));
     },
     onSettingsPress: () => dispatch(navigate("Settings")),
-    onQRScannerPress: () => dispatch(navigate("Scanner")),
+    onQRScannerPress: () =>{ 
+
+      console.log("-----qr scanner device2step----------")
+      // dispatch(selectGroup(this.props.group));          
+      console.log(dispatch)    
+      dispatch(navigate("Scanner"))
+
+  },
     onAddDevice: (device: Device) => dispatch(addDevice(device, false)),
     displayMessage: (message: string) =>
       dispatch(ToastActionsCreators.displayInfo(message, 1000)),
