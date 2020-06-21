@@ -1,6 +1,6 @@
 //@flow
 
-import type { Group} from './group'
+import type { Group,GroupDialogControl} from './group'
 import type { Device } from "./Device";
 import type { Resource } from "./Resource";
 import type { Chart } from "./Chart";
@@ -36,6 +36,11 @@ export type DevicesState = {
 export type GroupState={
 
   [group:string]:Group
+};
+
+export type GroupDialogState={
+
+  [group:boolean]:GroupDialogControl
 };
 
 export type ResourcesState = {

@@ -7,6 +7,8 @@ import devices from "../reducers/devices";
 import selectedDevice from "../reducers/selectedDevice";
 import selectedGroup from "../reducers/selectedGroup";
 import  group from "../reducers/group"
+
+import  groupDialogControl from "../reducers/groupDialogControl"
 import resources from "../reducers/resources";
 import selectedResource from "../reducers/selectedResource";
 import selectedAttributes from "../reducers/selectedAttributes";
@@ -23,7 +25,7 @@ import vibrate from "../middlewares/vibrate";
 const config = {
   key: "root",
   storage,
-  whitelist: ["devices", "login"]
+  whitelist: ["devices", "login","group"]
 };
 
 const navMiddleware = createReactNavigationReduxMiddleware(
@@ -36,6 +38,7 @@ function configureStore() {
     login,
     devices,
     group,
+    groupDialogControl,
     userDevices,
     selectedDevice,
     selectedGroup,

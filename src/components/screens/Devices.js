@@ -1,6 +1,8 @@
 //@flow
 
 import { connect } from "react-redux";
+import Modal from 'react-native-modal';
+import  Groupdialog  from './group'
 import {
   FlatList,
   View,
@@ -10,7 +12,8 @@ import {
   Clipboard,
   Text,
   TouchableWithoutFeedback ,
-  TouchableOpacity 
+  TouchableOpacity,
+  TextInput  
 } from "react-native";
 import DeviceComponent from "../devices/DeviceComponent";
 import React from "react";
@@ -18,7 +21,7 @@ import { MARGIN } from "../../constants/ThingerStyles";
 import Screen from "../containers/Screen";
 import { navigate } from "../../actions/nav";
 import { getResourcesFromApi } from "../../actions/fetch";
-import { addDevice, selectDevice,selectGroup } from "../../actions/device";
+import { addDevice, selectDevice,selectGroup,groupDialogOn } from "../../actions/device";
 import { removeAllResources } from "../../actions/resource";
 import type { Dispatch } from "../../types/Dispatch";
 import NavigationBar from "../navigation/NavigationBar";
@@ -47,15 +50,21 @@ type Props = {
   displayError: (message: string) => Dispatch
 };
 
-class DevicesScreen extends React.Component<Props> {
+class DevicesScreen extends React.Component<Props,State> {
   constructor(props) {
     super(props);
     new GoogleAnalyticsTracker(ID).trackScreenView("Main");
-    state={
-      group_image:''
-    }
+    this.state={
+      group_image:'',
+      group_name:'balaji',
+      group_dialog:false
+    };
+    // (this: any).GroupName=this.GroupName.bind(this);
+    console.log("--------screnn devices constructor props--------")
+    console.log(props);
   }
 
+ 
   // require('../../')
  DATA = [
     {
@@ -172,6 +181,18 @@ image:require('../../assets/group/bg.png')
     );
   };
 
+   addGroup=()=>{
+  
+      console.log(this.state.group_name)
+     }
+    
+GroupName=(input)=>{
+  this.setState({
+   group_name:input
+  })
+  console.log(this.state.group_name)
+ }
+ 
   onClipboardButtonPress = async () => {
     const {
       ids: devices,
@@ -197,7 +218,7 @@ image:require('../../assets/group/bg.png')
 
 //newly added function 
   group_iot = ({ item }) => (
-    <View        style={{ flex: 1, marginHorizontal: 5, marginBottom: 20,shadowColor: 'red',
+    <View        style={{ width:'50%', marginHorizontal: 5, marginBottom: 20,shadowColor: 'red',
     shadowOffset: { width: 2, height: 2 },
     shadowOpacity: 0.9,
     shadowRadius: 10,  
@@ -240,14 +261,19 @@ image:require('../../assets/group/bg.png')
    
       onDeviceClick,
       isUserDevices,
-      onQRScannerPress
+      onQRScannerPress,
+      group
     } = this.props;
 
     return (
       <View style={{ flex: 1 }}>
+              {/* //group */}
+
+
+      <Groupdialog group_dialog={this.state.group_dialog}/>
          <Text>devices</Text>
          <FlatList
-          data={this.DATA}
+          data={group}
           renderItem={this.group_iot}
           keyExtractor={item => item.id}
           numColumns={2}
@@ -290,7 +316,7 @@ image:require('../../assets/group/bg.png')
             <ActionButton.Item
               buttonColor="#9b59b6"
               title="Add Group"
-              onPress={()=>{console.log("group button clicked")}}
+              onPress={()=>{ this.props.onGroupDialogActivatorOn() }}
             >
              
               <Icon name="content-paste" style={styles.actionButtonIcon} />
@@ -329,6 +355,7 @@ image:require('../../assets/group/bg.png')
     const { isFetching, isUserDevices, onSettingsPress } = this.props;
 
     return (
+
       <Screen
         navigationBar={
           <NavigationBar
@@ -363,6 +390,71 @@ image:require('../../assets/group/bg.png')
   }
 }
 
+// function Groupdialog() {
+
+//   class Groupdialog extends React.Component<Props,State> {
+//     constructor(props) {
+//       super(props);
+//       this.state={
+//         group_image:'',
+//         group_name:'balaji',
+//         group_dialog:false,
+//       };
+//       // (this: any).GroupName=this.GroupName.bind(this);
+//       console.log("--------groupDialog constructor detailed--------")
+//       console.log(props);
+//     }
+
+//  addGroup=()=>{
+
+// this.props.group_dialog=false;
+//   // this.setState({
+//   //   group_dialog:true
+//   //  })
+ 
+//       console.log(this.state.group_name)
+//      }
+    
+// GroupName=(input)=>{
+//   this.setState({
+//    group_name:input
+//   })
+//   console.log(this.state.group_name)
+//  }
+ 
+//  render() {
+//   return (
+//     <View>
+//       <Modal isVisible={this.props.group_dialog} >
+//         <View style={{ flex: 1 }}>
+//           {/* <Text>I am the modal content!</Text> */}
+
+//           <View style={{flex:1,justifyContent:"center"}}>
+//             <View style={{backgroundColor:"white",padding:10,height:200}}>
+//   <Text>Add New Group</Text>
+//             <TextInput
+//       style={{ height: 40}}
+//       onChangeText={this.GroupName}
+//       value={this.state.group_name}  
+//     />
+
+// <TouchableOpacity 
+//           onPress={this.addGroup} 
+//         > 
+//           <Text>Add</Text> 
+//         </TouchableOpacity> 
+//             </View>
+//           </View>
+//         </View>
+//       </Modal>
+//     </View>
+//   )
+//  }
+// }
+
+
+
+
 const styles = StyleSheet.create({
   actionButtonIcon: {
     fontSize: 22,
@@ -373,13 +465,15 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   console.log("-----------screen devices------------");
-  console.log(state);
+  console.log(state.group.groups);
   const { routes: tabs, index: selectedTab } = state.nav.routes[0];
   const currentTab = tabs[selectedTab].routeName;
   // const isUserDevices: boolean = currentTab === "UserDevices";
   const isUserDevices: boolean = true;
 
   return {
+    group:state.group.groups,
+    groupDialog:state.groupDialogControl.groupDialogControl,
     ids: Object.keys(state.devices),
     devices: isUserDevices
       ? (Object.values(state.devices): any).filter(device =>
@@ -396,6 +490,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    onGroupDialogActivatorOn:()=>{
+      dispatch(groupDialogOn("on"));
+    },
     onGroupClick: group => {
       console.log("----------group id---------------");
       dispatch(removeAllResources());
@@ -423,5 +520,6 @@ const mapDispatchToProps = dispatch => {
       dispatch(ToastActionsCreators.displayError(message, 1000))
   };
 };
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(DevicesScreen);

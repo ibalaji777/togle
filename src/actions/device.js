@@ -56,7 +56,23 @@ export function removeDevice(device: string): REMOVE {
 export function selectDevice(device: string): SELECT {
   return { type: "DEVICE_SELECT", device };
 }
+
+export function groupDialogOn(device: string): SELECT {
+  return { type: "GroupDialogControlOn", device };
+}
+
+export function groupDialogOff(device: string): SELECT {
+  return { type: "GroupDialogControlOff", device };
+}
+
+
 //select group
+export function addGroup( group: any): ADD {
+  console.log(" from action addGroup ")
+  
+  return { type: "GROUP_ADD",new_group:group  };
+}
+
 export function selectGroup(device: string): SELECT {
   return { type: "GROUP_SELECT", device };
 }
