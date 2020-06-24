@@ -31,23 +31,40 @@ class QRScanner extends React.Component<Props, State> {
   };
 
   handleOnBarCodeRead(data) {
-    const { devices, displayError, addDevice } = this.props;
+    const { devices, displayError, addDevice,group } = this.props;
 
     this.setState({ scanning: true });
 
+    
+    console.debug("++++++++++++++++++++++++++++++device added 1st*************************");
+    console.debug(this.props)
+    console.debug(group)
+    console.log(group.group)
     //device already exist or not (validation)
+    let  group_name=String(group.group);
     try {
+      console.debug("------------------ qr data---------------")
+      // console.debug(data);
       const device = parseJWT(data.data);
       //add group manually here
       const id = Object.keys(device)[0];
       if (devices.includes(id)) {
-        console.log(device)
+        // console.debug(device)
         displayError("This device already exists");
       } else {
+        console.debug("****************************device added 1st*************************");
+        // console.debug(group_name)
+        var keys = Object.keys( device );
+      device[keys[0]]["group"]=group_name;
+
         addDevice(device);
       }
       setTimeout(() => this.setState({ scanning: false }), 1000);
     } catch (e) {
+      console.debug("-------------qr is not a device---------------")
+      console.debug(e)
+      // console.debug(this.props)
+       
       displayError("This QR isn't a device");
       setTimeout(() => this.setState({ scanning: false }), 1000);
     }
@@ -104,9 +121,24 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   console.log("---------from dispatch qr scanner----------")
   return {
-    addDevice: (device: Device) => {
-      console.log("device added");
-      console.log(device)
+    addDevice: (device) => {
+      console.debug("****************************device added*************************");
+      // console.debug(device)
+      // console.debug(typeof device)
+      // console.debug(device[0])
+      // console.debug(device[0].dev)
+      
+      // var set_group=device[keys[0]]
+      // console.debug(keys[0])
+      // console.debug(device[keys[0]])
+      // console.log(dispatch)
+  // console.debug(this.props)
+      // console.debug(device[keys[0]]["group"])
+      // console.debug(device[keys[0]])
+      // console.debug(device[keys[0]]["group"])
+      console.debug("///////////////////////////////////////////////////////////////");
+    //  device[0]['group']=this.props.group.group;
+
       dispatch(addDevice(device, false));
       dispatch(ToastActionsCreators.displayInfo("Added!", 1000));
       return dispatch(goBack());

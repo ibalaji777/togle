@@ -49,19 +49,31 @@ class Groupdialog extends React.Component<Props,State> {
 
 addGroup=()=>{
 
+
 let id = new Date().getUTCMilliseconds();
-let title=this.state.group_name;
-let group=(this.state.group_name).trim();
+let title=(this.state.group_name).toUpperCase();
+let group_field = (this.state.group_name).replace(/[ ]+/g, "");
+
+
 let image=require('../../../src/assets/group/kids_room.png');
 
-this.props.addGroup({
-  id: id,
-  title: title,
 
-group:group,
-top_icon_bg_color:'yellow',
-image:image
-})
+let checkExistorNot=obj=>obj.group==group_field;
+if(!(this.props.group).some(checkExistorNot))
+{
+  this.props.addGroup({
+    id: id,
+    title: title,
+  
+  group:group_field,
+  top_icon_bg_color:'yellow',
+  image:image
+  })
+  
+
+}else{
+  alert("group already exist")
+}
 
 this.props.groupDialogOff();
     console.log(this.state.group_name)

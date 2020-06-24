@@ -37,7 +37,7 @@ function configureStore() {
   const reducer = persistCombineReducers(config, {
     login,
     devices,
-    group,
+    group:group,
     groupDialogControl,
     userDevices,
     selectedDevice,

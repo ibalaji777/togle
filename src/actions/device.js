@@ -43,7 +43,7 @@ export type DeviceAction =
   | REQUEST
   | RECEIVE;
 
-export function addDevice(device: Device, isUserDevice: boolean): ADD {
+export function addDevice(device, isUserDevice: boolean): ADD {
   console.log("iam test this code work or not fine ")
   console.log(device)
   return { type: "DEVICE_ADD", device, isUserDevice };

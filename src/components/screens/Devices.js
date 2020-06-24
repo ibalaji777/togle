@@ -218,7 +218,7 @@ GroupName=(input)=>{
 
 //newly added function 
   group_iot = ({ item }) => (
-    <View        style={{ width:'50%', marginHorizontal: 5, marginBottom: 20,shadowColor: 'red',
+    <View        style={{ width:'47%', marginHorizontal: 5, marginBottom: 20,shadowColor: 'red',
     shadowOffset: { width: 2, height: 2 },
     shadowOpacity: 0.9,
     shadowRadius: 10,  

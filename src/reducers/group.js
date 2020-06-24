@@ -97,6 +97,6 @@ export default function group(
     }
 
     default:
-      return  { ...state };
+      return  state ;
   }
 }

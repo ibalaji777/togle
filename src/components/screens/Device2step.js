@@ -49,8 +49,15 @@ class DevicesStep2Screen extends React.Component<Props> {
   constructor(props) {
     super(props);
     new GoogleAnalyticsTracker(ID).trackScreenView("Main");
-    state={
-      group_image:''
+
+    console.debug("--------------contructor device2step-----------")
+    console.debug(props.devices)
+    let checkGroupExist=obj=>obj.group==props.group.group;
+var isGroupExist=(props.devices).some(checkGroupExist);
+console.debug(isGroupExist)
+    this.state={
+      group_image:'',
+      isGroupExist:isGroupExist,
     }
   }
 
@@ -239,6 +246,7 @@ top_icon_bg_color:'darkgreen'
     return (
       <View style={{ flex: 1 }}>
         <Text>devices2step hahaha{JSON.stringify(this.props)}</Text>
+        <Text>deha{JSON.stringify(this.state)}</Text>
          {/* <FlatList
           data={this.DATA}
           renderItem={this.group_iot}
@@ -248,20 +256,23 @@ top_icon_bg_color:'darkgreen'
           contentContainerStyle={{ paddingVertical: 20 }}
         /> */}
 
-
-        {devices.length ? (
+{/* {devices.length  */}
+        {this.state.isGroupExist
+          ? (
           <FlatList
             data={devices}
             keyExtractor={item => item.id}
-            renderItem={({ item }) => (
-              
+            renderItem={({ item }) =>{
+            if(item.group==this.props.group.group){
+              return (
+
               <DeviceComponent
                 name={item.name ? item.name : item.dev}
                 user={item.usr}
                 all={item}
                 onClick={() => onDeviceClick(item)}
               />
-            )}
+            )}}}
             ItemSeparatorComponent={this.renderSeparator}
           />
         ) : (
@@ -286,13 +297,13 @@ top_icon_bg_color:'darkgreen'
             >
               <Icon name="content-paste" style={styles.actionButtonIcon} />
             </ActionButton.Item>
-            <ActionButton.Item
+            {/* <ActionButton.Item
               buttonColor="#3498db"
               title="from picture"
               onPress={() => console.error("TODO: No implemented yet")}
             >
               <Icon name="photo" style={styles.actionButtonIcon} />
-            </ActionButton.Item>
+            </ActionButton.Item> */}
             <ActionButton.Item
               buttonColor="#1abc9c"
               title="from QR scanner"
@@ -368,8 +379,11 @@ const mapStateToProps = state => {
   const { routes: tabs, index: selectedTab } = state.nav.routes[0];
   const currentTab = tabs[selectedTab].routeName;
   const isUserDevices: boolean = currentTab === "UserDevices";
+console.log("---------------------device2step----------------")
+console.log(state)
 
   return {
+
     group:state.selectedGroup,
     ids: Object.keys(state.devices),
     devices: isUserDevices
