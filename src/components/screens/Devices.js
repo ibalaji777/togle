@@ -218,7 +218,7 @@ GroupName=(input)=>{
 
 //newly added function 
   group_iot = ({ item }) => (
-    <View        style={{ width:'47%', marginHorizontal: 5, marginBottom: 20,shadowColor: 'red',
+    <View        style={{ width:'47%', marginHorizontal: 5, marginBottom: 15,shadowColor: 'red',
     shadowOffset: { width: 2, height: 2 },
     shadowOpacity: 0.9,
     shadowRadius: 10,  
@@ -271,7 +271,7 @@ GroupName=(input)=>{
 
 
       <Groupdialog group_dialog={this.state.group_dialog}/>
-         <Text>devices</Text>
+         <Text style={{color:'#0080FF',fontWeight:'bold',fontSize:14,marginLeft:4,marginTop:4}}>FAVORITES</Text>
          <FlatList
           data={group}
           renderItem={this.group_iot}
@@ -359,7 +359,7 @@ GroupName=(input)=>{
       <Screen
         navigationBar={
           <NavigationBar
-            title={"Smart Switch"}
+            title={"Togle"}
             main={true}
             button={
               isUserDevices

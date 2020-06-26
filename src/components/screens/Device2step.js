@@ -245,8 +245,8 @@ top_icon_bg_color:'darkgreen'
 
     return (
       <View style={{ flex: 1 }}>
-        <Text>devices2step hahaha{JSON.stringify(this.props)}</Text>
-        <Text>deha{JSON.stringify(this.state)}</Text>
+        {/* <Text>devices2step hahaha{JSON.stringify(this.props)}</Text>
+        <Text>deha{JSON.stringify(this.state)}</Text> */}
          {/* <FlatList
           data={this.DATA}
           renderItem={this.group_iot}
@@ -340,7 +340,7 @@ top_icon_bg_color:'darkgreen'
 
       navigationBar={
         <NavigationBar
-          title={"Smart switch"}
+          title={"Togle"}
           button={{
             icon: "cog",
             onPress: onSettingsPress

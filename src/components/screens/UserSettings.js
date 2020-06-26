@@ -29,9 +29,11 @@ class UserSettings extends React.Component<Props> {
         {login && (
           <ScrollView>
             <List>
+            {/* value={login.user != null ? login.user : ""} */}
+         
               <OutputItem
                 name={"User"}
-                value={login.user != null ? login.user : ""}
+                value="Guest"
               />
               <OutputItem
                 name={"Server"}
@@ -39,13 +41,13 @@ class UserSettings extends React.Component<Props> {
               />
             </List>
 
-            <CenterView style={{ margin: MARGIN }}>
+            {/* <CenterView style={{ margin: MARGIN }}>
               <RoundedButton
                 color={LIGHT_RED}
                 text="Log out"
                 onPress={() => onLogOut()}
               />
-            </CenterView>
+            </CenterView> */}
           </ScrollView>
         )}
       </Screen>

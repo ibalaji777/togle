@@ -39,7 +39,7 @@ class Groupdialog extends React.Component<Props,State> {
       super(props);
       this.state={
         group_image:'',
-        group_name:'balaji',
+        group_name:'',
         group_dialog:false,
       };
       // (this: any).GroupName=this.GroupName.bind(this);
