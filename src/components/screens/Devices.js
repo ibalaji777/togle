@@ -466,8 +466,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
   console.log("-----------screen devices------------");
   console.log(state.group.groups);
-  const { routes: tabs, index: selectedTab } = state.nav.routes[0];
-  const currentTab = tabs[selectedTab].routeName;
+  // const { routes: tabs, index: selectedTab } = state.nav.routes[0];
+  // const currentTab = tabs[selectedTab].routeName;
   // const isUserDevices: boolean = currentTab === "UserDevices";
   const isUserDevices: boolean = true;
 

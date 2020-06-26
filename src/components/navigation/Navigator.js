@@ -58,8 +58,8 @@ const MainRoutes = TabNavigator(
 //screen initialize
 export const Routes = StackNavigator(
   {
-    // Main: { screen: Devices, key: "Main" },
-    Main: { screen: MainRoutes, key: "Main" },
+    Main: { screen: Devices, key: "Main" },
+    // Main: { screen: MainRoutes, key: "Main" },
     // Scanner: { screen: QRScanner },
         Scanner: { screen: QRScanner },
     Settings: { screen: UserSettings },

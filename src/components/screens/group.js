@@ -41,22 +41,42 @@ class Groupdialog extends React.Component<Props,State> {
         group_image:'',
         group_name:'',
         group_dialog:false,
+
+randomImages:[
+  {
+    image:require('../../../src/assets/group/kids_room.png')
+  }
+  ,
+  {
+    image:require('../../../src/assets/group/kids_room.png')
+  },
+  {
+    image:require('../../../src/assets/group/living_room.png')
+  },
+  {
+    image:require('../../../src/assets/group/bedroom.png')
+  }
+]
       };
       // (this: any).GroupName=this.GroupName.bind(this);
       console.log("--------groupDialog constructor detailed--------")
       console.log(props);
     }
 
+ 
+
 addGroup=()=>{
 
 
+  if(this.state.group_name!=''){
 let id = new Date().getUTCMilliseconds();
 let title=(this.state.group_name).toUpperCase();
 let group_field = (this.state.group_name).replace(/[ ]+/g, "");
 
 
-let image=require('../../../src/assets/group/kids_room.png');
-
+let image=this.state.randomImages[Math.floor(Math.random() * 3)].image;
+// let image=require('../../../src/assets/group/'+select_image[2]+'');
+let color=['green','blue','yellow','red','orange','lightblue','lightgreen','aliceblue','antiquewhite','aqua','beige','bisque','blueviolet','coral','cornflowerblue'];
 
 let checkExistorNot=obj=>obj.group==group_field;
 if(!(this.props.group).some(checkExistorNot))
@@ -66,17 +86,25 @@ if(!(this.props.group).some(checkExistorNot))
     title: title,
   
   group:group_field,
-  top_icon_bg_color:'yellow',
+  top_icon_bg_color:color[Math.floor(Math.random() * 15)],
   image:image
   })
   
-
+  this.props.groupDialogOff();
 }else{
   alert("group already exist")
 }
 
-this.props.groupDialogOff();
+
+  }
+  else{
+    alert("Name field must contain");
+  }
     console.log(this.state.group_name)
+
+    this.setState({
+      group_name:'',
+    })
   }
   
 cancelGroup=()=>{
@@ -137,8 +165,8 @@ style={{marginRight:20}}
 const mapStateToProps = state => {
     console.log("-----------group dialog devices------------");
     console.log(state);
-    const { routes: tabs, index: selectedTab } = state.nav.routes[0];
-    const currentTab = tabs[selectedTab].routeName;
+    // const { routes: tabs, index: selectedTab } = state.nav.routes[0];
+    // const currentTab = tabs[selectedTab].routeName;
     // const isUserDevices: boolean = currentTab === "UserDevices";
     const isUserDevices: boolean = true;
   

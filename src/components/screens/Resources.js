@@ -136,7 +136,7 @@ class ResourcesScreen extends React.Component<Props, State> {
       <Screen
         navigationBar={
           <NavigationBar
-            title={device ? (device.name ? "device name"+device.name : "device dev"+device.dev) : "Device"}
+            title={device ? (device.name ? device.name : device.dev) : "Device"}
             button={{
               icon: "cog",
               onPress: onSettingsClick
@@ -144,8 +144,8 @@ class ResourcesScreen extends React.Component<Props, State> {
           />
         }
       >
-        <Text>resource.js</Text>
-        <Text>{JSON.stringify(this.props)}</Text>
+        {/* <Text>resource.js</Text>
+        <Text>{JSON.stringify(this.props)}</Text> */}
 
         {device &&
           (device.isFetching && !this.state.pullRefresh ? (

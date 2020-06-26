@@ -376,9 +376,11 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-  const { routes: tabs, index: selectedTab } = state.nav.routes[0];
-  const currentTab = tabs[selectedTab].routeName;
-  const isUserDevices: boolean = currentTab === "UserDevices";
+  // const { routes: tabs, index: selectedTab } = state.nav.routes[0];
+  // const currentTab = tabs[selectedTab].routeName;
+  // const isUserDevices: boolean = currentTab === "UserDevices";
+  const isUserDevices: boolean = false;
+  
 console.log("---------------------device2step----------------")
 console.log(state)
 
