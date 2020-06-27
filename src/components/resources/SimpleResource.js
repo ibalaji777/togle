@@ -36,7 +36,13 @@ class SimpleResourceView extends React.Component<Props, State> {
     (this: any).handleOnChangeAttribute = this.handleOnChangeAttribute.bind(
       this
     );
+    // this.setState({
+    //     in:data.in
+    //   });
   }
+
+
+
 
   static getDerivedStateFromProps(nextProps: Props, prevState: State) {
     if (prevState.posted) return defaultState;
@@ -74,6 +80,12 @@ class SimpleResourceView extends React.Component<Props, State> {
 
     // Input Resource
     if (data.hasOwnProperty("in")) {
+      
+      if (this.state.in === undefined) {
+        this.setState({
+          in:data.in
+        })
+      } 
       return (
         <InputAttribute
           id={resource}

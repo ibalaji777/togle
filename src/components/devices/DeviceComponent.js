@@ -20,8 +20,9 @@ export default class DeviceComponent extends React.Component<Props> {
       {/* <Text style={styles.device}>Device component</Text> */}
      <TouchableOpacity onPress={onClick}>
         <View style={{ backgroundColor: "white", padding: 15 }}>
-          <Text style={styles.device}>{name}</Text>
-          <Text style={styles.user}>{user}</Text>
+           <Text style={styles.device}>Device:  {name}</Text>
+          <Text style={styles.user}>User:    {user}</Text>
+          <Text style={styles.user}>Status:   {all.isOnline?'Online':'Offline'}</Text>
           {/* <Text style={styles.user}>{ JSON.stringify(all)}</Text> */}
         </View>
       </TouchableOpacity>

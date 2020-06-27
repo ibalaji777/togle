@@ -1,7 +1,7 @@
 //@flow
 
 import React from "react";
-import { StyleSheet, Switch, TextInput } from "react-native";
+import { StyleSheet, Switch, TextInput,Text,View } from "react-native";
 import AttributeView from "./Attribute";
 import type { Attribute } from "../../types/Attribute";
 import {
@@ -45,13 +45,15 @@ export default class InputAttribute extends React.Component<Props> {
           />
         );
       case "boolean":
+        // inputValue=false;
         return (
-          typeof inputValue === "boolean" && (
-            <Switch
+          <View>
+            {/* <Text>{JSON.stringify(this.props)}</Text> */}
+             <Switch
               value={inputValue}
               onValueChange={value => onChange(id, value)}
             />
-          )
+           </View>
         );
       default:
         return null;

@@ -75,7 +75,7 @@ class MultipleResourceView extends React.Component<Props, State> {
 
     return (
       <View>
-        <Text>MultipleResource</Text>
+        {/* <Text>MultipleResource</Text> */}
         <H1Text ellipsizeMode="tail" numberOfLines={1}>
           {resource}
         </H1Text>
