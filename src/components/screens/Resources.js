@@ -66,6 +66,15 @@ class ResourcesScreen extends React.Component<Props, State> {
     this.setState({ pullRefresh: false });
   }
 
+
+  async onRefreshClick() {
+    const { onGetResources, device } = this.props;
+    this.setState({ pullRefresh: true });
+    await onGetResources(device);
+    this.setState({ pullRefresh: false });
+  }
+
+
   renderItem = ({ item }) => {
     const {
       resources,
@@ -79,7 +88,7 @@ class ResourcesScreen extends React.Component<Props, State> {
       const data: MultipleResource = (resources[item].data: any);
       return (
         <View>
-        <Text>multiple aware flat list</Text>
+        {/* <Text>multiple aware flat list</Text> */}
 
         <MultipleResourceView
           resource={item}
@@ -137,13 +146,21 @@ class ResourcesScreen extends React.Component<Props, State> {
     return (
       <Screen
         navigationBar={
-          <NavigationBar
-            title={device ? (device.name ? device.name : device.dev) : "Device"}
-            button={{
-              icon: "cog",
-              onPress: onSettingsClick
-            }}
-          />
+          // <NavigationBar
+          //   title={device ? (device.name ? device.name : device.dev) : "Device"}
+          //   button={{
+          //     icon: "cog",
+          //     onPress: onSettingsClick
+          //   }}
+          // />
+        
+            <NavigationBar
+              title={device ? (device.name ? device.name : device.dev) : "Device"}
+              button={{
+                icon: "refresh",
+                onPress: (() => this.onRefresh(): any)
+              }}
+            />
         }
       >
         {/* <Text>resource.js</Text>
@@ -209,7 +226,14 @@ const mapDispatchToProps = dispatch => {
       dispatch(navigate("Chart"));
     },
     onGetResources: device => dispatch(getResourcesFromApi(device)),
-    onSettingsClick: () => dispatch(navigate("Info"))
+    onSettingsClick: () => dispatch(navigate("Info")),
+    // onRefreshClick:()=>{
+    //   const { onGetResources, device } = this.props;
+    //   this.setState({ pullRefresh: true });
+    //   await onGetResources(device);
+    //   this.setState({ pullRefresh: false });
+    // }
+  
   };
 };
 

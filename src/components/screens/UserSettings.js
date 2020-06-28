@@ -35,10 +35,10 @@ class UserSettings extends React.Component<Props> {
                 name={"User"}
                 value="Guest"
               />
-              <OutputItem
+              {/* <OutputItem
                 name={"Server"}
                 value={login.server != null ? login.server : ""}
-              />
+              /> */}
             </List>
 
             {/* <CenterView style={{ margin: MARGIN }}>

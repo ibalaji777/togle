@@ -1,4 +1,4 @@
-package io.thinger.app;
+package angalware.togle.iot;
 
 import com.facebook.react.ReactActivity;
 

@@ -61,6 +61,34 @@ console.debug(isGroupExist)
     }
   }
 
+  
+  // componentWillMount() {
+  //  console.debug(this.props)
+  //  alert("will mount")
+  // let checkGroupExist=obj=>obj.group==this.props.group.group;
+  // var isGroupExist=(this.props.devices).some(checkGroupExist);
+  // console.debug(isGroupExist)
+  //     this.setState({
+
+  //       isGroupExist:isGroupExist,
+  //     })
+
+  // }
+  componentWillReceiveProps(){
+    // alert("will mount")
+    let checkGroupExist=obj=>obj.group==this.props.group.group;
+    var isGroupExist=(this.props.devices).some(checkGroupExist);
+    console.debug(isGroupExist)
+        this.setState({
+  
+          isGroupExist:isGroupExist,
+        })
+  
+  }
+  // componentDidMount(){
+
+  //   alert("did mount")
+  // }
   // require('../../')
  DATA = [
     {
@@ -233,7 +261,17 @@ top_icon_bg_color:'darkgreen'
     </View>
   );
 
+//  isGroupExist_fn=()=>{
+ 
+//   let checkGroupExist=obj=>obj.group==props.group.group;
+//   var isGroupExist=(props.devices).some(checkGroupExist);
+//   console.debug(isGroupExist)
+//       this.setState({
 
+//         isGroupExist:isGroupExist,
+//       })
+  
+// }
 
   renderContent() {
     const {
@@ -415,6 +453,7 @@ const mapDispatchToProps = dispatch => {
       // dispatch(selectGroup(this.props.group));          
       console.log(dispatch)    
       dispatch(navigate("Scanner"))
+      // this.forceUpdate();
 
   },
     onAddDevice: (device: Device) => dispatch(addDevice(device, false)),

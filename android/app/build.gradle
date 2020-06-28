@@ -98,7 +98,9 @@ android {
      compileSdkVersion rootProject.ext.compileSdkVersion
   buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig{
-        applicationId "io.thinger.app"   
+        // applicationId "io.thinger.app"   
+
+        applicationId "angalware.togle.iot"   
       minSdkVersion rootProject.ext.minSdkVersion
       targetSdkVersion rootProject.ext.targetSdkVersion
               versionCode 7
@@ -131,11 +133,17 @@ android {
     }
     signingConfigs {
         release {
-            if (project.hasProperty('THINGER_APP_RELEASE_STORE_FILE')) {
-                storeFile file(THINGER_APP_RELEASE_STORE_FILE)
-                storePassword THINGER_APP_RELEASE_STORE_PASSWORD
-                keyAlias THINGER_APP_RELEASE_KEY_ALIAS
-                keyPassword THINGER_APP_RELEASE_KEY_PASSWORD
+            // if (project.hasProperty('THINGER_APP_RELEASE_STORE_FILE')) {
+            //     storeFile file(THINGER_APP_RELEASE_STORE_FILE)
+            //     storePassword THINGER_APP_RELEASE_STORE_PASSWORD
+            //     keyAlias THINGER_APP_RELEASE_KEY_ALIAS
+            //     keyPassword THINGER_APP_RELEASE_KEY_PASSWORD
+            // }
+              if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+                storeFile file(MYAPP_RELEASE_STORE_FILE)
+                storePassword MYAPP_RELEASE_STORE_PASSWORD
+                keyAlias MYAPP_RELEASE_KEY_ALIAS
+                keyPassword MYAPP_RELEASE_KEY_PASSWORD
             }
         }
     }
