@@ -9,7 +9,9 @@ import {
   StyleSheet,
   Clipboard,
   Text,
-  TouchableWithoutFeedback 
+  TouchableWithoutFeedback,
+  Alert ,
+  BackHandler 
 } from "react-native";
 import DeviceComponent from "../devices/DeviceComponent";
 import React from "react";
@@ -59,6 +61,20 @@ console.debug(isGroupExist)
       group_image:'',
       isGroupExist:isGroupExist,
     }
+  }
+  handleBackButton = () => {
+
+    this.props.Goback();
+  
+    return true;
+  } 
+  
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+  }
+  
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }
 
   
@@ -440,6 +456,9 @@ console.log(state)
 
 const mapDispatchToProps = dispatch => {
   return {
+    Goback:()=>{
+      dispatch({type:'Navigation/BACK'})
+    },
     onDeviceClick: device => {
       dispatch(removeAllResources());
       dispatch(selectDevice(device.id));

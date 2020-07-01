@@ -15,6 +15,7 @@ import QRScanner from "../screens/QRScanner";
 import Resources from "../screens/Resources";
 import DeviceInfo from "../screens/DeviceInfo";
 import Chart from "../screens/Chart";
+import Menu from "../screens/MenuList";
 import ShowQR from "../screens/ShowQR";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import {
@@ -61,6 +62,7 @@ export const Routes = StackNavigator(
     Main: { screen: Devices, key: "Main" },
     // Main: { screen: MainRoutes, key: "Main" },
     // Scanner: { screen: QRScanner },
+    Menu: {  screen: Menu},
         Scanner: { screen: QRScanner },
     Settings: { screen: UserSettings },
     //new grouped devices

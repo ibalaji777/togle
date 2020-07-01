@@ -2,6 +2,8 @@
 
 import { connect } from "react-redux";
 import Modal from 'react-native-modal';
+
+
 import  Groupdialog  from './group'
 import {
   FlatList,
@@ -13,7 +15,9 @@ import {
   Text,
   TouchableWithoutFeedback ,
   TouchableOpacity,
-  TextInput  
+  TextInput ,
+  Alert ,
+  BackHandler
 } from "react-native";
 import DeviceComponent from "../devices/DeviceComponent";
 import React from "react";
@@ -64,7 +68,35 @@ class DevicesScreen extends React.Component<Props,State> {
     console.log(props);
   }
 
- 
+
+  handleBackButton = () => {
+
+  //   this.props.Goback();
+  // alert(this.props.navigation.state.routeName);
+   Alert.alert(
+       'Exit Togle App',
+       'Exiting the Togle application?', [{
+           text: 'Cancel',
+           onPress:function(){ console.log('Cancel Pressed')},
+           style: 'cancel'
+       }, {
+           text: 'OK',
+           onPress: function(){ BackHandler.exitApp()}
+       }, ], {
+           cancelable: false
+       }
+    )
+    return true;
+  } 
+  
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+  }
+  
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+  }
+  
   // require('../../')
  DATA = [
     {
@@ -217,13 +249,13 @@ GroupName=(input)=>{
   };
 
 //newly added function 
-  group_iot = ({ item }) => (
+  group_iot = ({ item ,index}) => (
     <View        style={{ width:'47%', marginHorizontal: 5, marginBottom: 15,shadowColor: 'red',
     shadowOffset: { width: 2, height: 2 },
     shadowOpacity: 0.9,
     shadowRadius: 10,  
     elevation: 15 }}>
-      <TouchableOpacity onPress={()=>this.props.onGroupClick(item)}>  
+      <TouchableOpacity onLongPress={()=>this.props.onGroupDialogRemoveOn(item,index)} onPress={()=>this.props.onGroupClick(item)}>  
           <Image
         style={{ width: "100%", height: 180 }}
         // source={{ uri: item.image }}
@@ -241,7 +273,9 @@ GroupName=(input)=>{
         source={this.switch_group(item.group)}
       />
     </View>
-<Text style={{ position:"absolute",fontSize:12,fontWeight: '900',   textAlign: "center", marginTop: 8,bottom:10,left:10 }}>{item.title}</Text>
+    <View style={{backgroundColor:"rgba(255,255,255,0.50)", position:"absolute",fontSize:12,fontWeight: '900',   textAlign: "center", marginTop: 8,bottom:10,left:10 }}>
+<Text >{item.title}</Text>
+</View>
 <View   style={{ justifyContent:'center',alignItems:'center',fontSize:18,fontWeight: "bold", position:"absolute",borderRadius :50,backgroundColor:'rgba(211, 211, 211, 0.4)', bottom:10,right:5, width: 45, height: 45,shadowColor: 'red',
     shadowOffset: { width: 2, height: 2 },
     shadowOpacity: 0.9,
@@ -268,13 +302,13 @@ GroupName=(input)=>{
     return (
       <View style={{ flex: 1 }}>
               {/* //group */}
-
+    {/* <Text>{JSON.stringify(this.props)}</Text> */}
 
       <Groupdialog group_dialog={this.state.group_dialog}/>
          <Text style={{color:'#0080FF',fontWeight:'bold',fontSize:14,marginLeft:4,marginTop:4}}>FAVORITES</Text>
          <FlatList
           data={group}
-          renderItem={this.group_iot}
+          renderItem={(item,index)=>this.group_iot(item,index)}
           keyExtractor={item => item.id}
           numColumns={2}
           style={{ flex: 1 }}
@@ -364,7 +398,7 @@ GroupName=(input)=>{
             button={
               isUserDevices
                 ? {
-                    icon: "cog",
+                    icon: "ellipsis-v",
                     onPress: onSettingsPress
                   }
                 : undefined
@@ -490,6 +524,14 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    Goback:()=>{
+      dispatch({type:'Navigation/BACK'})
+    },
+    onGroupDialogRemoveOn:(item,index)=>{
+    dispatch({type:"GroupDialogItemIndex",index:index})
+     dispatch({type:"GroupDialogRemoveOn"})
+     dispatch(selectGroup(item.group));
+    },
     onGroupDialogActivatorOn:()=>{
       dispatch(groupDialogOn("on"));
     },
@@ -511,7 +553,7 @@ const mapDispatchToProps = dispatch => {
       console.log(navigate("Device"));
       dispatch(navigate("Device"));
     },
-    onSettingsPress: () => dispatch(navigate("Settings")),
+    onSettingsPress: () => dispatch(navigate("Menu")),
     onQRScannerPress: () => dispatch(navigate("Scanner")),
     onAddDevice: (device: Device) => dispatch(addDevice(device, false)),
     displayMessage: (message: string) =>

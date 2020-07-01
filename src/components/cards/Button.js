@@ -26,7 +26,15 @@ export default class CardButton extends React.Component<Props> {
         onPress={onClick}
         activeOpacity={0.6}
       >
-        {isLoading ? (
+            <PText
+              style={{
+                marginLeft: 5,
+                fontSize: 18
+              }}
+            >
+              {text}
+            </PText>
+        {/* {isLoading ? (
           <ActivityIndicator size="small" color="#000000" />
         ) : (
           <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
@@ -39,7 +47,7 @@ export default class CardButton extends React.Component<Props> {
               {text}
             </PText>
           </View>
-        )}
+        )} */}
       </TouchableOpacity>
     );
   }

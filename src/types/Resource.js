@@ -15,6 +15,9 @@ export type MultipleResource = {
 };
 
 export function isMultipleResource(resource: Resource): boolean {
+  console.debug("-----------------ismultiplr resource --------------------");
+  console.debug(resource);
+
   return (
     (resource.hasOwnProperty("in") && typeof resource.in === "object") ||
     (resource.hasOwnProperty("out") && typeof resource.out === "object")

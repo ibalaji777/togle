@@ -41,20 +41,34 @@ class Groupdialog extends React.Component<Props,State> {
         group_image:'',
         group_name:'',
         group_dialog:false,
+        groupIndex:props.groupIndex,
 
 randomImages:[
-  {
-    image:require('../../../src/assets/group/kids_room.png')
-  }
+  { name:'other',
+    image:require('../../../src/assets/group/other.jpg')
+  },
+  {  name:'b',
+  image:require('../../../src/assets/group/balcony.jpg')
+}
+
   ,
-  {
-    image:require('../../../src/assets/group/kids_room.png')
+  { name:'bed',
+    image:require('../../../src/assets/group/bed.jpg')
   },
-  {
-    image:require('../../../src/assets/group/living_room.png')
+  ,
+  { name:'bet',
+    image:require('../../../src/assets/group/bed.jpg')
   },
-  {
-    image:require('../../../src/assets/group/bedroom.png')
+   { name:'ki',
+  image:require('../../../src/assets/group/Kitchen2.jpg')
+},
+
+  { name:'kitchen',
+    image:require('../../../src/assets/group/Kitchen2.jpg')
+  },
+  ,
+  {  name:'balcony',
+    image:require('../../../src/assets/group/balcony.jpg')
   }
 ]
       };
@@ -74,7 +88,33 @@ let title=(this.state.group_name).toUpperCase();
 let group_field = (this.state.group_name).replace(/[ ]+/g, "");
 
 
-let image=this.state.randomImages[Math.floor(Math.random() * 3)].image;
+// let image=this.state.randomImages[Math.floor(Math.random() * 3)].image;
+
+let isImageNameExist=false;
+let set_image='';
+let assign_image="";
+this.state.randomImages.forEach(element => {
+  var patt = new RegExp(""+element.name+"","gi");
+
+  var result = patt.test(this.state.group_name);
+
+
+  if(result){
+    isImageNameExist=true;
+    assign_image=element.image;
+  }
+
+});
+
+if(isImageNameExist){
+
+set_image=assign_image
+}else{
+//or random image
+set_image=this.state.randomImages[0].image;
+
+}
+
 // let image=require('../../../src/assets/group/'+select_image[2]+'');
 let color=['green','blue','yellow','red','orange','lightblue','lightgreen','aliceblue','antiquewhite','aqua','beige','bisque','blueviolet','coral','cornflowerblue'];
 
@@ -87,7 +127,7 @@ if(!(this.props.group).some(checkExistorNot))
   
   group:group_field,
   top_icon_bg_color:color[Math.floor(Math.random() * 15)],
-  image:image
+  image:set_image
   })
   
   this.props.groupDialogOff();
@@ -113,6 +153,34 @@ this.props.groupDialogOff();
 
   }
 
+  RemoveGroup=()=>{
+
+
+    for (var key in  this.props.state.devices) {
+      // if ( this.props.devices.hasOwnProperty(key)) {
+          // console.log(key + " -> " + p[key]);
+
+          // alert(key)
+console.debug("-------------group remove devices----------------------")
+console.debug(this.props.state.devices[key].group)    
+if(this.props.state.devices[key].group==this.props.groupName){
+// alert("matched key"+key)
+this.props.removeDevice(key);
+    }
+
+
+      }
+    // }
+    this.props.RemoveGroup(this.props.groupIndex);
+    this.cancelRemoveGroup();
+    
+      }
+  cancelRemoveGroup=()=>{
+
+    this.props.cancelRemoveGroup();
+    
+      }
+    
 GroupName=(input)=>{
   this.setState({
    group_name:input
@@ -125,13 +193,16 @@ GroupName=(input)=>{
  const {group}=this.props;
   return (
     <View>
+              {/* <Text>{JSON.stringify(this.props.devices)}</Text> */}
+        {/* <Text>{JSON.stringify(this.props.state.devices)}</Text> */}
+
       <Modal isVisible={this.props.groupDialog} >
         <View style={{ flex: 1 }}>
           {/* <Text>I am the modal content!</Text> */}
 
           <View style={{flex:1,justifyContent:"center"}}>
             <View style={{backgroundColor:"white",padding:10,height:200}}>
-  <Text>Add New Group</Text>
+  <Text style={{fontSize:18}}>Add New Group</Text>
             <TextInput
       style={{ height: 40}}
       onChangeText={this.GroupName}
@@ -157,6 +228,37 @@ style={{marginRight:20}}
           </View>
         </View>
       </Modal>
+
+      <Modal isVisible={this.props.groupDialogRemove} >
+        <View style={{ flex: 1 }}>
+          {/* <Text>I am the modal content!</Text> */}
+
+          <View style={{flex:1,justifyContent:"center"}}>
+            <View style={{backgroundColor:"white",padding:10,height:200}}>
+  <Text style={{fontSize:15}}>Do you  want to remove group?</Text>
+           
+<View style={{flex:1}}></View>
+<View style={{flexDirection:'row'}}>
+<View style={{flex:1 }}></View>
+
+<TouchableOpacity 
+style={{marginRight:20}}
+          onPress={this.cancelRemoveGroup} 
+        > 
+          <Text>Cancel</Text> 
+        </TouchableOpacity>
+<TouchableOpacity 
+          onPress={this.RemoveGroup} 
+        > 
+          <Text>Remove</Text> 
+        </TouchableOpacity> 
+        </View> 
+            </View>
+          </View>
+        </View>
+      </Modal>
+
+
     </View>
   )
  }
@@ -171,8 +273,12 @@ const mapStateToProps = state => {
     const isUserDevices: boolean = true;
   
     return {
+      state:state,
+      groupName:state.selectedGroup,
       group:state.group.groups,
       groupDialog:state.groupDialogControl.groupDialogControl,
+      groupDialogRemove:state.groupDialogControl.groupDialogRemove,
+      groupIndex:state.groupDialogControl.GroupDialogItemIndex,
       ids: Object.keys(state.devices),
       devices: isUserDevices
         ? (Object.values(state.devices): any).filter(device =>
@@ -191,9 +297,19 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+      removeDevice:(key)=>{
+      
+        dispatch({type:"DEVICE_REMOVE_SPLICE",key:key})
+      },
 
        addGroup:(group)=>{
         dispatch(addGroup(group));
+       },
+       RemoveGroup:(ind)=>{
+    dispatch({type:"GROUP_REMOVE",remove_index:ind})
+       },
+       cancelRemoveGroup:()=>{
+dispatch({type:"GroupDialogRemoveOff"})
        },
         groupDialogOff:()=>{
             dispatch(groupDialogOff("off"));

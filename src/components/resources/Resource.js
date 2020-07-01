@@ -40,7 +40,7 @@ class ResourceComponent extends React.Component<Props> {
       buttons.push(
         <Button
           color={LIGHT_GREEN}
-          text={"Post"}
+          text={"Set"}
           isLoading={isFetching}
           onClick={onPostClick}
         />

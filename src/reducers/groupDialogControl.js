@@ -7,7 +7,9 @@ import type { GroupDialogState } from "../types/State";
 /* For testing in simulator without Camera */
 const initialState: GroupDialogState = {
 
-    groupDialogControl:false
+    groupDialogControl:false,
+    groupDialogRemove:false,
+    GroupDialogItemIndex:-1
 }
 
 // const initialState: GroupState = initialStateTest;
@@ -29,7 +31,25 @@ export default function group(
 
     }
 
+    case "GroupDialogRemoveOn":
+
+      return {
+        ...state,groupDialogRemove:true
+      };
+    case "GroupDialogRemoveOff":
+    return {
+...state,groupDialogRemove:false
+
+
+    }
+
+    case "GroupDialogItemIndex":
+      return {
+  ...state,GroupDialogItemIndex:action.index
+  
+  
+      }
     default:
-      return  { ...state };
+      return  state;
   }
 }

@@ -65,6 +65,20 @@ export default function devices(
       const newState = Object.assign({}, state);
       delete newState[action.device];
       return newState;
+      case "DEVICE_REMOVE_SPLICE":
+        //get group name
+        console.log("&key((((((((((((((((((((((("+action.key)
+        console.log("-----------before delete-----------")
+        const newStateO = Object.assign({}, state);
+        console.log(newStateO)
+        delete newStateO[action.key];
+        console.log("-----------After delete-----------")
+        console.log(newStateO)
+        return newStateO;
+        // delete state[action.key];
+        // state.groups.splice(action.remove_index, 1);
+        // console.log()
+        // return state;
     default:
       return state;
   }

@@ -10,22 +10,22 @@ const initialState: GroupState = {
     {
       id: "1",
       title: "LIVING ROOM",
-image:require('../../src/assets/group/living_room.png'),
+image:require('../../src/assets/group/other.jpg'),
 group:'living_room',
 top_icon_bg_color:'green'
     },
     {
       id: "2",
-      title: "BED ROOM",
-image:require('../../src/assets/group/bedroom.png'),
+      title: "BED ROOM 1",
+image:require('../../src/assets/group/bed.jpg'),
 group:'bed_room',
 top_icon_bg_color:'lightblue'
 
     },
         {
       id: "2",
-      title: "KIDS ROOM",
-image:require('../../src/assets/group/kids_room.png'),
+      title: "BED ROOM 2",
+image:require('../../src/assets/group/bed.jpg'),
 group:'kids_room',
 top_icon_bg_color:'yellow'
 
@@ -35,24 +35,24 @@ top_icon_bg_color:'yellow'
     {
       id: "3",
       title: "KICHEN",
-image:require('../../src/assets/group/kitchen.jpg'),
+image:require('../../src/assets/group/Kitchen2.jpg'),
 group:'kitchen',
 top_icon_bg_color:'red'
     },
     {
       id: "4",
-      title: "BOILER ROOM",
-image:require('../../src/assets/group/bg.png'),
+      title: "Balcony",
+image:require('../../src/assets/group/balcony.jpg'),
 group:'boilder_room',
 top_icon_bg_color:'orange'
     },
-    {
-      id: "5",
-      title: "GARDEN",
-image:require('../../src/assets/group/garden.png'),
-group:'garden',
-top_icon_bg_color:'darkgreen'
-    },
+//     {
+//       id: "5",
+//       title: "GARDEN",
+// image:require('../../src/assets/group/garden.png'),
+// group:'garden',
+// top_icon_bg_color:'darkgreen'
+//     },
     // {
 //       id: "6",
 //       title: "SABOR MORENO",
@@ -89,7 +89,7 @@ export default function group(
         ...state
       };
     case "GROUP_REMOVE":
-   state.groups.splice(index, action.remove_index);
+   state.groups.splice(action.remove_index, 1);
     return {
 ...state
 
