@@ -20,13 +20,36 @@ type Props = {
     icon: string,
     onPress: () => any
   },
+
+  settingbutton?: {
+    icon: string,
+    onPress: () => any
+  },
+
   dispatch: Dispatch
 };
 
+
 class NavigationBar extends React.Component<Props> {
   render() {
-    const { title, button, main = false, dispatch } = this.props;
+    const { title,settingbutton, button, main = false, dispatch } = this.props;
 
+    // checkElementNavbar=()=>{
+
+      var component1=null;
+      var component2=null;
+      // {button ? (
+            if(button){
+               component1=(<TouchableOpacity onPress={button.onPress}><Icon name={button.icon}  size={FONT_SIZE_H1}  style={styles.icon}/></TouchableOpacity>);
+            }
+    
+            if(settingbutton){
+              component2=(<TouchableOpacity onPress={settingbutton.onPress}> <Icon name={settingbutton.icon} size={FONT_SIZE_H1}  style={styles.icon} />  </TouchableOpacity>);
+            }
+      // return component;
+    // }
+    
+    
     return (
       <View style={styles.container}>
         <View style={{ flex: 1, paddingLeft: 0 }}>
@@ -40,9 +63,22 @@ class NavigationBar extends React.Component<Props> {
             </TouchableOpacity>
           )}
         </View>
-        <Text style={styles.title}>{title}</Text>
-        <View style={{ flex: 1, alignItems: "flex-end" }}>
-          {button && (
+          <Text style={styles.title}>{title}</Text>
+        <View style={{flex: 1, alignItems: "flex-end"  }}>
+        {/* {component1}
+        {component2} */}
+<View style={{flex: 1, alignItems: "flex-end",flexDirection:"row"}}>
+{settingbutton ? (
+            <TouchableOpacity onPress={settingbutton.onPress}>
+              <Icon
+                name={settingbutton.icon}
+                size={FONT_SIZE_H1}
+                style={styles.icon}
+              />
+            </TouchableOpacity>
+          ):null}
+          
+          {button ? (
             <TouchableOpacity onPress={button.onPress}>
               <Icon
                 name={button.icon}
@@ -50,7 +86,9 @@ class NavigationBar extends React.Component<Props> {
                 style={styles.icon}
               />
             </TouchableOpacity>
-          )}
+          ):null}
+
+</View>
         </View>
       </View>
     );
@@ -69,6 +107,8 @@ const styles = StyleSheet.create({
   icon: {
     color: "white",
     padding: PADDING,
+    // paddingTop:PADDING-10,
+    
     paddingRight: PADDING * 2
   },
   title: {

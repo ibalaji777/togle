@@ -31,14 +31,14 @@ class UserSettings extends React.Component<Props> {
             <List>
             {/* value={login.user != null ? login.user : ""} */}
          
-              <OutputItem
+              {/* <OutputItem
                 name={"User"}
                 value="Guest"
-              />
-              {/* <OutputItem
+              /> */}
+              <OutputItem
                 name={"Server"}
                 value={login.server != null ? login.server : ""}
-              /> */}
+              />
             </List>
 
             {/* <CenterView style={{ margin: MARGIN }}>

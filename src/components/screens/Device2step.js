@@ -78,20 +78,7 @@ console.debug(isGroupExist)
   }
 
   
-  // componentWillMount() {
-  //  console.debug(this.props)
-  //  alert("will mount")
-  // let checkGroupExist=obj=>obj.group==this.props.group.group;
-  // var isGroupExist=(this.props.devices).some(checkGroupExist);
-  // console.debug(isGroupExist)
-  //     this.setState({
-
-  //       isGroupExist:isGroupExist,
-  //     })
-
-  // }
-  componentWillReceiveProps(){
-    // alert("will mount")
+   componentWillReceiveProps(){
     let checkGroupExist=obj=>obj.group==this.props.group.group;
     var isGroupExist=(this.props.devices).some(checkGroupExist);
     console.debug(isGroupExist)
@@ -101,111 +88,7 @@ console.debug(isGroupExist)
         })
   
   }
-  // componentDidMount(){
-
-  //   alert("did mount")
-  // }
-  // require('../../')
- DATA = [
-    {
-      id: "1",
-      title: "LIVING ROOM",
-image:require('../../assets/group/bg.png'),
-group:'living_room',
-top_icon_bg_color:'green'
-    },
-    {
-      id: "2",
-      title: "BED ROOM",
-image:require('../../assets/group/bg.png'),
-group:'bed_room',
-top_icon_bg_color:'lightblue'
-
-    },
-        {
-      id: "2",
-      title: "KIDS ROOM",
-image:require('../../assets/group/bg.png'),
-group:'kids_room',
-top_icon_bg_color:'yellow'
-
-    },
-
-    
-    {
-      id: "3",
-      title: "KICHEN",
-image:require('../../assets/group/bg.png'),
-group:'kitchen',
-top_icon_bg_color:'red'
-    },
-    {
-      id: "4",
-      title: "BOILER ROOM",
-image:require('../../assets/group/bg.png'),
-group:'boilder_room',
-top_icon_bg_color:'orange'
-    },
-    {
-      id: "5",
-      title: "GARDEN",
-image:require('../../assets/group/bg.png'),
-group:'garden',
-top_icon_bg_color:'darkgreen'
-    },
-//     {
-//       id: "6",
-//       title: "SABOR MORENO",
-// image:require('../../assets/group/bg.png')
-//     },
-//     {
-//       id: "7",
-//       title: "0 MESTRE PUB",
-// image:require('../../assets/group/bg.png')
-//     },
-//     {
-//       id: "8",
-//       title: "GRILL 54 CHEF",
-// image:require('../../assets/group/bg.png')
-//     }
-  ];
-  
-
-
-  switch_group=(condition)=>{
-
-    switch (condition) {
-      case 'living_room':
-
-        return require('../../assets/group/living_room.png');
-      case 'bed_room':
-
-      return require('../../assets/group/bedroom.png');
-      
-      case 'kids_room':
-
-       return require('../../assets/group/kids_room.png');
-
-      case 'kitchen':
-
-      return require('../../assets/group/kitchen.jpg');
-      case 'boiler_room':
-
-      return require('../../assets/group/bg.png');
-      case 'garden':
-
-        return require('../../assets/group/garden.png');
-  
-          
-
-
-      default:
-        return require('../../assets/group/bg.png');
-
-    }
-
-
-  }
+ 
 
 
 
@@ -233,6 +116,8 @@ top_icon_bg_color:'darkgreen'
       const token = await Clipboard.getString();
       const device = parseJWT(token);
       const id = Object.keys(device)[0];
+      var keys = Object.keys( device );
+      device[keys[0]]["group"]=group_name;
       if (devices.includes(id)) {
         displayError("This device already exists");
       } else {
@@ -277,17 +162,6 @@ top_icon_bg_color:'darkgreen'
     </View>
   );
 
-//  isGroupExist_fn=()=>{
- 
-//   let checkGroupExist=obj=>obj.group==props.group.group;
-//   var isGroupExist=(props.devices).some(checkGroupExist);
-//   console.debug(isGroupExist)
-//       this.setState({
-
-//         isGroupExist:isGroupExist,
-//       })
-  
-// }
 
   renderContent() {
     const {
@@ -301,16 +175,7 @@ top_icon_bg_color:'darkgreen'
       <View style={{ flex: 1 }}>
         {/* <Text>devices2step hahaha{JSON.stringify(this.props)}</Text>
         <Text>deha{JSON.stringify(this.state)}</Text> */}
-         {/* <FlatList
-          data={this.DATA}
-          renderItem={this.group_iot}
-          keyExtractor={item => item.id}
-          numColumns={2}
-          style={{ flex: 1 }}
-          contentContainerStyle={{ paddingVertical: 20 }}
-        /> */}
 
-{/* {devices.length  */}
         {this.state.isGroupExist
           ? (
           <FlatList
@@ -351,13 +216,7 @@ top_icon_bg_color:'darkgreen'
             >
               <Icon name="content-paste" style={styles.actionButtonIcon} />
             </ActionButton.Item>
-            {/* <ActionButton.Item
-              buttonColor="#3498db"
-              title="from picture"
-              onPress={() => console.error("TODO: No implemented yet")}
-            >
-              <Icon name="photo" style={styles.actionButtonIcon} />
-            </ActionButton.Item> */}
+
             <ActionButton.Item
               buttonColor="#1abc9c"
               title="from QR scanner"
@@ -376,29 +235,13 @@ top_icon_bg_color:'darkgreen'
 
     return (
       <Screen
-            //   navigationBar={
-      //     <NavigationBar
-      //       title={"Smart Switch"}
-      //       main={true}
-      //       button={
-      //         isUserDevices
-      //           ? {
-      //               icon: "cog",
-      //               onPress: onSettingsPress
-      //             }
-      //           : undefined
-      //       }
-      //     />
-      //   }
-      // >
-
       navigationBar={
         <NavigationBar
           title={"Togle"}
-          button={{
-            icon: "cog",
-            onPress: onSettingsPress
-          }}
+          // button={{
+          //   icon: "cog",
+          //   onPress: onSettingsPress
+          // }}
         />
       }
     >
@@ -430,9 +273,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-  // const { routes: tabs, index: selectedTab } = state.nav.routes[0];
-  // const currentTab = tabs[selectedTab].routeName;
-  // const isUserDevices: boolean = currentTab === "UserDevices";
+
   const isUserDevices: boolean = false;
   
 console.log("---------------------device2step----------------")

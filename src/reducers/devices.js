@@ -16,7 +16,8 @@ const initialStateTest: DevicesState = {
     isFetching: false,
     isOnline: true,
     isAuthorized: true,
-    server: "https://api.thinger.io",
+    server: "https://togle.aws.thinger.io",
+    // server: "https://api.thinger.io",
     hasServerConnection: true,
     name: ""
   }

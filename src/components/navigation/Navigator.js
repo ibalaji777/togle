@@ -25,47 +25,13 @@ import {
 import UserDevices from "../screens/User";
 import UserSettings from "../screens/UserSettings";
 
-const MainRoutes = TabNavigator(
-  {
-  //   UserDevices: {
-  //     screen: UserDevices,
-  //     navigationOptions: {
-  //       title: "User",
-  //       tabBarIcon: ({ tintColor }) => (
-  //         <Icon name="person" size={22} style={{ color: tintColor }} />
-  //       )
-  //     }
-  //   },
-    ScannedDevices: {
-      screen: Devices,
-      navigationOptions: {
-        title: "Scanned",
-        tabBarIcon: ({ tintColor }) => (
-          <Icon name="devices-other" size={22} style={{ color: tintColor }} />
-        )
-      }
-    }
-  },
-  {
-    tabBarOptions: {
-      activeTintColor: COLOR_TAB_BAR_ACTIVE,
-      inactiveTintColor: COLOR_TAB_BAR_INACTIVE
-    },
-    tabBarPosition: "bottom",
-    animationEnabled: false,
-    swipeEnabled: false
-  }
-);
-//screen initialize
+
 export const Routes = StackNavigator(
   {
     Main: { screen: Devices, key: "Main" },
-    // Main: { screen: MainRoutes, key: "Main" },
-    // Scanner: { screen: QRScanner },
     Menu: {  screen: Menu},
-        Scanner: { screen: QRScanner },
+    Scanner: { screen: QRScanner },
     Settings: { screen: UserSettings },
-    //new grouped devices
     Device2step: { screen: Device2step },
     Device: { screen: Resources },
     Info: { screen: DeviceInfo },
@@ -73,7 +39,6 @@ export const Routes = StackNavigator(
     ShowQR: { screen: ShowQR }
   },
   {
-    // initialRouteName: 'UserSettings',
     headerMode: "none",
     cardStyle: {
       shadowOpacity: 0

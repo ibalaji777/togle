@@ -50,7 +50,7 @@ import {
 
     if(item.action=="support"){
     return (
-      <TouchableOpacity>
+      // <TouchableOpacity>
         <View style={styles.row}>
           <Image source={{ uri: item.image }} style={styles.pic} />
           <View>
@@ -78,7 +78,7 @@ import {
           </View>
           {/* <Image style={[styles.icon, { marginRight: 50 }]} source={{uri: callIcon}}/> */}
         </View>
-      </TouchableOpacity>
+      // </TouchableOpacity>
     );
     }
 
@@ -86,7 +86,6 @@ import {
     
     if(item.action=="email"){
         return (
-          <TouchableOpacity>
             <View style={styles.row}>
               <Image source={{ uri: item.image }} style={styles.pic} />
               <View>
@@ -101,17 +100,14 @@ import {
 
                 </View>
               </View>
-              {/* <Image style={[styles.icon, { marginRight: 50 }]} source={{uri: callIcon}}/> */}
             </View>
-          </TouchableOpacity>
-        );
+         );
         }
 
             
     if(item.action=="web"){
         return (
-        //   <TouchableOpacity>
-            <View style={styles.row}>
+             <View style={styles.row}>
               <Image source={{ uri: item.image }} style={styles.pic} />
               <View>
                
@@ -132,9 +128,9 @@ import {
 
                 </View>
               </View>
-              {/* <Image style={[styles.icon, { marginRight: 50 }]} source={{uri: callIcon}}/> */}
+           
             </View>
-         //</TouchableOpacity> 
+        
         );
         }
 

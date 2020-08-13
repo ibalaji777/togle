@@ -45,10 +45,8 @@ export default class InputAttribute extends React.Component<Props> {
           />
         );
       case "boolean":
-        // inputValue=false;
         return (
           <View>
-            {/* <Text>{JSON.stringify(this.props)}</Text> */}
              <Switch
               value={inputValue}
               onValueChange={value => onChange(id, value)}

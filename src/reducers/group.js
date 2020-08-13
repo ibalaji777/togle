@@ -46,33 +46,10 @@ image:require('../../src/assets/group/balcony.jpg'),
 group:'boilder_room',
 top_icon_bg_color:'orange'
     },
-//     {
-//       id: "5",
-//       title: "GARDEN",
-// image:require('../../src/assets/group/garden.png'),
-// group:'garden',
-// top_icon_bg_color:'darkgreen'
-//     },
-    // {
-//       id: "6",
-//       title: "SABOR MORENO",
-// image:require('../../assets/group/bg.png')
-//     },
-//     {
-//       id: "7",
-//       title: "0 MESTRE PUB",
-// image:require('../../assets/group/bg.png')
-//     },
-//     {
-//       id: "8",
-//       title: "GRILL 54 CHEF",
-// image:require('../../assets/group/bg.png')
-//     }
   ]
 };
   
 
-// const initialState: GroupState = initialStateTest;
 
 export default function group(
   state: GroupState = initialState,
@@ -80,7 +57,6 @@ export default function group(
 ) {
   switch (action.type) {
     case "GROUP_ADD":
-      // {...action.new_group,image:require('../../src/assets/group/kids_room.png')}
           state.groups.push(action.new_group);
           console.log("-------group reducer-------")
           console.log(state)

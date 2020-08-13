@@ -1,6 +1,6 @@
 //@flow
 
-import { View, Share } from "react-native";
+import { View, Share,Text } from "react-native";
 import React from "react";
 import { connect } from "react-redux";
 import Screen from "../containers/Screen";
@@ -26,11 +26,12 @@ class ShowQRScreen extends React.Component<Props> {
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
+          <Text>{this.props.jwt}</Text>
           <QRCode
-            value={this.props.jwt}
-            size={300}
-            color="black"
-            backgroundColor={COLOR_BACKGROUND}
+            value="{this.props.jwt}"
+            // size={300}
+            // color="black"
+            // backgroundColor={COLOR_BACKGROUND}
           />
           <CenterView style={{ margin: MARGIN }}>
             <RoundedButton

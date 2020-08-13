@@ -146,23 +146,33 @@ class ResourcesScreen extends React.Component<Props, State> {
     return (
       <Screen
         navigationBar={
-          // <NavigationBar
-          //   title={device ? (device.name ? device.name : device.dev) : "Device"}
-          //   button={{
-          //     icon: "cog",
-          //     onPress: onSettingsClick
-          //   }}
-          // />
+          <NavigationBar
+            title={device ? (device.name ? device.name : device.dev) : "Device"}
+            button={{
+              icon: "cog",
+              onPress: onSettingsClick
+            }}
+            // settingbutton={{
+            //       icon: "refresh",
+            //       onPress: (() => this.onRefresh(): any)
+            //     }}
+          />
         
-            <NavigationBar
-              title={device ? (device.name ? device.name : device.dev) : "Device"}
-              button={{
-                icon: "refresh",
-                onPress: (() => this.onRefresh(): any)
-              }}
-            />
+            // <NavigationBar
+            //   title={device ? (device.name ? device.name : device.dev) : "Device"}
+            //   button={{
+            //     icon: "refresh",
+            //     onPress: (() => this.onRefresh(): any)
+            //   }}
+
+              
+
+              
+            // />)
         }
       >
+
+        
         {/* <Text>resource.js</Text>
         <Text>{JSON.stringify(this.props)}</Text> */}
 
@@ -184,14 +194,17 @@ class ResourcesScreen extends React.Component<Props, State> {
               onPressButton={this.onRefresh}
             />
           ) : !device.hasServerConnection ? (
+
+            // + device.server
             <ErrorMessage
-              message={"Couldn't connect to\n" + device.server}
+              message={"Couldn't connect device\n"}
               icon="plug"
               onPressButton={this.onRefresh}
             />
           ) : !device.isAuthorized ? (
+            // device.usr + 
             <ErrorMessage
-              message={device.usr + " isn't authorized"}
+              message={" Not authorized User"}
               icon="lock"
               onPressButton={this.onRefresh}
             />
@@ -227,12 +240,6 @@ const mapDispatchToProps = dispatch => {
     },
     onGetResources: device => dispatch(getResourcesFromApi(device)),
     onSettingsClick: () => dispatch(navigate("Info")),
-    // onRefreshClick:()=>{
-    //   const { onGetResources, device } = this.props;
-    //   this.setState({ pullRefresh: true });
-    //   await onGetResources(device);
-    //   this.setState({ pullRefresh: false });
-    // }
   
   };
 };

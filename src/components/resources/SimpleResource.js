@@ -36,9 +36,6 @@ class SimpleResourceView extends React.Component<Props, State> {
     (this: any).handleOnChangeAttribute = this.handleOnChangeAttribute.bind(
       this
     );
-    // this.setState({
-    //     in:data.in
-    //   });
   }
 
 

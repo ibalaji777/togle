@@ -63,7 +63,6 @@ class DevicesScreen extends React.Component<Props,State> {
       group_name:'balaji',
       group_dialog:false
     };
-    // (this: any).GroupName=this.GroupName.bind(this);
     console.log("--------screnn devices constructor props--------")
     console.log(props);
   }
@@ -71,8 +70,6 @@ class DevicesScreen extends React.Component<Props,State> {
 
   handleBackButton = () => {
 
-  //   this.props.Goback();
-  // alert(this.props.navigation.state.routeName);
    Alert.alert(
        'Exit Togle App',
        'Exiting the Togle application?', [{
@@ -97,107 +94,7 @@ class DevicesScreen extends React.Component<Props,State> {
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }
   
-  // require('../../')
- DATA = [
-    {
-      id: "1",
-      title: "LIVING ROOM",
-image:require('../../assets/group/bg.png'),
-group:'living_room',
-top_icon_bg_color:'green'
-    },
-    {
-      id: "2",
-      title: "BED ROOM",
-image:require('../../assets/group/bg.png'),
-group:'bed_room',
-top_icon_bg_color:'lightblue'
-
-    },
-        {
-      id: "2",
-      title: "KIDS ROOM",
-image:require('../../assets/group/bg.png'),
-group:'kids_room',
-top_icon_bg_color:'yellow'
-
-    },
-
-    
-    {
-      id: "3",
-      title: "KICHEN",
-image:require('../../assets/group/bg.png'),
-group:'kitchen',
-top_icon_bg_color:'red'
-    },
-    {
-      id: "4",
-      title: "BOILER ROOM",
-image:require('../../assets/group/bg.png'),
-group:'boilder_room',
-top_icon_bg_color:'orange'
-    },
-    {
-      id: "5",
-      title: "GARDEN",
-image:require('../../assets/group/bg.png'),
-group:'garden',
-top_icon_bg_color:'darkgreen'
-    },
-    {
-      id: "6",
-      title: "SABOR MORENO",
-image:require('../../assets/group/bg.png')
-    },
-    {
-      id: "7",
-      title: "0 MESTRE PUB",
-image:require('../../assets/group/bg.png')
-    },
-    {
-      id: "8",
-      title: "GRILL 54 CHEF",
-image:require('../../assets/group/bg.png')
-    }
-  ];
   
-
-
-  switch_group=(condition)=>{
-
-    switch (condition) {
-      case 'living_room':
-
-        return require('../../assets/group/living_room.png');
-      case 'bed_room':
-
-      return require('../../assets/group/bedroom.png');
-      
-      case 'kids_room':
-
-       return require('../../assets/group/kids_room.png');
-
-      case 'kitchen':
-
-      return require('../../assets/group/kitchen.jpg');
-      case 'boiler_room':
-
-      return require('../../assets/group/bg.png');
-      case 'garden':
-
-        return require('../../assets/group/garden.png');
-  
-          
-
-
-      default:
-        return require('../../assets/group/bg.png');
-
-    }
-
-
-  }
 
 
 
@@ -258,31 +155,15 @@ GroupName=(input)=>{
       <TouchableOpacity onLongPress={()=>this.props.onGroupDialogRemoveOn(item,index)} onPress={()=>this.props.onGroupClick(item)}>  
           <Image
         style={{ width: "100%", height: 180 }}
-        // source={{ uri: item.image }}
         source={item.image}
 
-        // source={this.switch_group(item.group)}
       />
 
 
-
-<View   style={{ justifyContent:'center',alignItems:'center', position:"absolute",borderRadius :50,backgroundColor:item.top_icon_bg_color, top:5,left:5, width: 60, height: 60,overflow:"hidden", }}>
-<Image
-        style={{  width: 30, height: 30 ,zIndex: 500 }}
-        // source={{ uri: item.image }}
-        source={this.switch_group(item.group)}
-      />
-    </View>
     <View style={{backgroundColor:"rgba(255,255,255,0.50)", position:"absolute",fontSize:12,fontWeight: '900',   textAlign: "center", marginTop: 8,bottom:10,left:10 }}>
 <Text >{item.title}</Text>
 </View>
-<View   style={{ justifyContent:'center',alignItems:'center',fontSize:18,fontWeight: "bold", position:"absolute",borderRadius :50,backgroundColor:'rgba(211, 211, 211, 0.4)', bottom:10,right:5, width: 45, height: 45,shadowColor: 'red',
-    shadowOffset: { width: 2, height: 2 },
-    shadowOpacity: 0.9,
-    shadowRadius: 10,  
-    elevation: 15 }}>  
-<Text style={{fontSize:20,zIndex: 500,fontWeight:'900'}}>></Text>
-</View>
+
 </TouchableOpacity>
     </View>
   );
@@ -316,35 +197,6 @@ GroupName=(input)=>{
         />
 
 
-        {/* {devices.length ? (
-          <FlatList
-            data={devices}
-            keyExtractor={item => item.id}
-            renderItem={({ item }) => (
-              
-              <DeviceComponent
-                name={item.name ? item.name : item.dev}
-                user={item.usr}
-                all={item}
-                onClick={() => onDeviceClick(item)}
-              />
-            )}
-            ItemSeparatorComponent={this.renderSeparator}
-          />
-        ) : (
-          <View
-            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-          >
-            <Image
-              source={require("../../assets/no_devices.png")}
-              style={{ height: 100, width: 100, margin: MARGIN * 2 }}
-            />
-            <H1Text>Ooops!</H1Text>
-            <H2Text>You could add a device...</H2Text>
-          </View>
-        )} */}
-
-        {/* {!isUserDevices && ( */}
           <ActionButton buttonColor="rgba(231,76,60,1)">
 
             <ActionButton.Item
@@ -356,29 +208,7 @@ GroupName=(input)=>{
               <Icon name="content-paste" style={styles.actionButtonIcon} />
             </ActionButton.Item>
             
-            {/* <ActionButton.Item
-              buttonColor="#9b59b6"
-              title="from clipboard"
-              onPress={this.onClipboardButtonPress}
-            >
-             
-              <Icon name="content-paste" style={styles.actionButtonIcon} />
-            </ActionButton.Item>
-            
-            <ActionButton.Item
-              buttonColor="#3498db"
-              title="from picture"
-              onPress={() => console.error("TODO: No implemented yet")}
-            >
-              <Icon name="photo" style={styles.actionButtonIcon} />
-            </ActionButton.Item>
-            <ActionButton.Item
-              buttonColor="#1abc9c"
-              title="from QR scanner"
-              onPress={onQRScannerPress}
-            >
-              <Icon name="photo-camera" style={styles.actionButtonIcon} />
-            </ActionButton.Item> */}
+ 
           </ActionButton>
         {/* )} */}
       </View>
@@ -424,67 +254,6 @@ GroupName=(input)=>{
   }
 }
 
-// function Groupdialog() {
-
-//   class Groupdialog extends React.Component<Props,State> {
-//     constructor(props) {
-//       super(props);
-//       this.state={
-//         group_image:'',
-//         group_name:'balaji',
-//         group_dialog:false,
-//       };
-//       // (this: any).GroupName=this.GroupName.bind(this);
-//       console.log("--------groupDialog constructor detailed--------")
-//       console.log(props);
-//     }
-
-//  addGroup=()=>{
-
-// this.props.group_dialog=false;
-//   // this.setState({
-//   //   group_dialog:true
-//   //  })
- 
-//       console.log(this.state.group_name)
-//      }
-    
-// GroupName=(input)=>{
-//   this.setState({
-//    group_name:input
-//   })
-//   console.log(this.state.group_name)
-//  }
- 
-//  render() {
-//   return (
-//     <View>
-//       <Modal isVisible={this.props.group_dialog} >
-//         <View style={{ flex: 1 }}>
-//           {/* <Text>I am the modal content!</Text> */}
-
-//           <View style={{flex:1,justifyContent:"center"}}>
-//             <View style={{backgroundColor:"white",padding:10,height:200}}>
-//   <Text>Add New Group</Text>
-//             <TextInput
-//       style={{ height: 40}}
-//       onChangeText={this.GroupName}
-//       value={this.state.group_name}  
-//     />
-
-// <TouchableOpacity 
-//           onPress={this.addGroup} 
-//         > 
-//           <Text>Add</Text> 
-//         </TouchableOpacity> 
-//             </View>
-//           </View>
-//         </View>
-//       </Modal>
-//     </View>
-//   )
-//  }
-// }
 
 
 
@@ -500,9 +269,6 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
   console.log("-----------screen devices------------");
   console.log(state.group.groups);
-  // const { routes: tabs, index: selectedTab } = state.nav.routes[0];
-  // const currentTab = tabs[selectedTab].routeName;
-  // const isUserDevices: boolean = currentTab === "UserDevices";
   const isUserDevices: boolean = true;
 
   return {

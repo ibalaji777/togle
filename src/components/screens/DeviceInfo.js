@@ -67,7 +67,7 @@ class DeviceInfo extends React.Component<Props, State> {
           <ScrollView>
             <List>
               <OutputItem name={"Device"} value={device.dev} />
-              <OutputItem name={"User"} value={device.usr} />
+              {/* <OutputItem name={"User"} value={device.usr} /> */}
               {isUserDevice ? (
                 <OutputItem
                   name={"Description"}
@@ -87,7 +87,7 @@ class DeviceInfo extends React.Component<Props, State> {
                   //   placeholder={THINGER_SERVER}
                   //   onChangeText={this.handleOnChangeText}
                   // />,
-                  <EnterItem name={"Token QR"} onPress={() => onShowQR()} />,
+                  // <EnterItem name={"Token QR"} onPress={() => onShowQR()} />,
                   <OutputItem
                     name={"Token creation date"}
                     value={timestampToString(device.iat)}

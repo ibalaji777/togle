@@ -24,7 +24,10 @@ export function parseJWT(jwt: string) {
         isFetching: false,
         isOnline: false,
         isAuthorized: false,
-        server: "https://api.thinger.io",
+        server: "https://togle.aws.thinger.io",
+        // server: "https://api.thinger.io",
+
+        
         hasServerConnection: false
       }
     };
