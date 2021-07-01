@@ -94,35 +94,36 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
 
-     compileSdkVersion rootProject.ext.compileSdkVersion
-  buildToolsVersion rootProject.ext.buildToolsVersion
-    defaultConfig{
-        // applicationId "io.thinger.app"   
-
-        applicationId "angalware.togle.iot"   
-      minSdkVersion rootProject.ext.minSdkVersion
-      targetSdkVersion rootProject.ext.targetSdkVersion
-              versionCode 7
-        versionName "0.2.5"
+    defaultConfig {
+        applicationId "com.thingerio"
+        minSdkVersion 16
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
 
+         signingConfigs {
+        release {
+            if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+                storeFile file(MYAPP_RELEASE_STORE_FILE)
+                storePassword MYAPP_RELEASE_STORE_PASSWORD
+                keyAlias MYAPP_RELEASE_KEY_ALIAS
+                keyPassword MYAPP_RELEASE_KEY_PASSWORD
+            }
+        }
     }
-    // compileSdkVersion 23
-    // buildToolsVersion "23.0.1"
 
-    // defaultConfig {
-    //     applicationId "io.thinger.app"
-    //     minSdkVersion 16
-    //     targetSdkVersion 23
-    //     versionCode 7
-    //     versionName "0.2.5"
-    //     ndk {
-    //         abiFilters "armeabi-v7a", "x86"
-    //     }
-    // }
+     buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
+    }
     splits {
         abi {
             reset()
@@ -131,27 +132,10 @@ android {
             include "armeabi-v7a", "x86"
         }
     }
-    signingConfigs {
-        release {
-            // if (project.hasProperty('THINGER_APP_RELEASE_STORE_FILE')) {
-            //     storeFile file(THINGER_APP_RELEASE_STORE_FILE)
-            //     storePassword THINGER_APP_RELEASE_STORE_PASSWORD
-            //     keyAlias THINGER_APP_RELEASE_KEY_ALIAS
-            //     keyPassword THINGER_APP_RELEASE_KEY_PASSWORD
-            // }
-              if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
-                storeFile file(MYAPP_RELEASE_STORE_FILE)
-                storePassword MYAPP_RELEASE_STORE_PASSWORD
-                keyAlias MYAPP_RELEASE_KEY_ALIAS
-                keyPassword MYAPP_RELEASE_KEY_PASSWORD
-            }
-        }
-    }
     buildTypes {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-            signingConfig signingConfigs.release
         }
     }
     // applicationVariants are e.g. debug, release
@@ -170,14 +154,10 @@ android {
 }
 
 dependencies {
-    // compile project(':react-native-vector-icons')
     compile project(':react-native-vector-icons')
     compile project(':react-native-svg')
     compile project(':react-native-google-analytics-bridge')
-    // compile project(':react-native-camera')
-    compile (project(':react-native-camera')) {
-      exclude group: "com.android.support", module: 'support-v4'
-}
+    compile project(':react-native-camera')
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:23.0.1"
     compile "com.facebook.react:react-native:+"  // From node_modules
